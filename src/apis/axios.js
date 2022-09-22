@@ -4,9 +4,11 @@ export const axiosInstace = axios.create({
   baseURL: "http://ec2-3-37-201-15.ap-northeast-2.compute.amazonaws.com:8080",
 });
 
-export const getPosts = async () => {
+export const getPosts = async (selectedCategory, selectedPage) => {
   try {
-    const { data } = await axiosInstace.get(`/questions`);
+    const { data } = await axiosInstace.get(
+      `/questions?page=${selectedPage - 1}&category=${selectedCategory}`
+    );
 
     return data;
   } catch (error) {

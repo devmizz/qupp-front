@@ -6,31 +6,31 @@ import { getPosts } from "../../apis/axios";
 
 const categories = [
   {
-    id: 0,
+    id: "All",
     text: "전체",
   },
   {
-    id: 1,
+    id: "Humanities",
     text: "인문",
   },
   {
-    id: 2,
+    id: "SocialScience",
     text: "사회",
   },
   {
-    id: 3,
+    id: "Business",
     text: "상경",
   },
   {
-    id: 4,
+    id: "NaturalScience",
     text: "자연",
   },
   {
-    id: 5,
+    id: "Engineering",
     text: "공학",
   },
   {
-    id: 6,
+    id: "Art",
     text: "예술",
   },
 ];
@@ -38,13 +38,23 @@ const categories = [
 function Posts() {
   const [posts, setPosts] = useState({
     content: [{}],
+    totalPages: 0,
   });
-  const [selectedCategory, setSelectedCategory] = useState(0);
 
-  const onCategoryClick = (id) => setSelectedCategory(id);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const onCategoryClick = (id) => {
+    setSelectedCategory(id);
+  }
+
+  const [selectedPage, setSelectedPage] = useState("1");
+
+  const onPageClick = (page) => {
+    setSelectedPage(page);
+  }
 
   const getPostsData = async () => {
-    const postsData = await getPosts();
+    const postsData = await getPosts(selectedCategory, selectedPage);
 
     if (postsData) {
       setPosts(postsData);
@@ -54,7 +64,7 @@ function Posts() {
 
   useEffect(() => {
     getPostsData();
-  }, []);
+  }, [selectedCategory, selectedPage]);
 
   return (
     <div>
@@ -64,13 +74,13 @@ function Posts() {
             {categories.map((category) => (
               <li
                 key={category.text}
-                className={`text-gray-600 py-4 px-6 flex flex-1 justify-center hover:text-blue-500 focus:outline-none${
+                className={`text-gray-600 flex flex-1 justify-center hover:text-blue-500 focus:outline-none${
                   category.id === selectedCategory
                     ? ` text-blue-500 border-b-2 font-medium border-blue-500`
                     : ""
                 }`}
               >
-                <button onClick={() => onCategoryClick(category.id)}>
+                <button className="py-4 px-6" onClick={() => onCategoryClick(category.id)}>
                   {category.text}
                 </button>
               </li>
@@ -102,6 +112,18 @@ function Posts() {
           </tbody>
         ))}
       </Table>
+      
+      <div class="justify-center my-8 select-none flex">
+        {[...Array(posts.totalPages)].map((n, index) => (
+          <button
+           className="py-2 px-4 shadow-md no-underline rounded-full bg-red text-black font-sans font-semibold text-sm border-red btn-primary hover:text-white hover:bg-red-light focus:outline-none active:shadow-none"
+           onClick={() => onPageClick(index + 1)}
+          >
+            {index + 1}
+          </button>	
+        ))}
+      </div>
+
     </div>
   );
 }

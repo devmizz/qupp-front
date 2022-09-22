@@ -14,9 +14,9 @@ function SignUp() {
         <Form.Control type="password" placeholder="Password" />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="formBasicNickname">
         <Form.Label>닉네임</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Control type="nickname" placeholder="Enter nickname" />
       </Form.Group>
 
       <Button variant="primary" type="submit">
