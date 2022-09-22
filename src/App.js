@@ -16,7 +16,8 @@ function App() {
         <Head />
         <Routes>
           <Route path="/" element={<Posts />}></Route>
-          <Route path="/post/*" element={<Post />}></Route>
+          <Route path="/posts" element={<Posts />}></Route>
+          <Route path="/post/:id" element={<Post />}></Route>
 
           <Route path="/login" element={<Login />}></Route>
           <Route path="/create_account" element={<SignUp />}></Route>
