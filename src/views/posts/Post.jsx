@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { getPost } from "../../apis/axios"
@@ -21,7 +21,7 @@ function Post() {
 
   useEffect(() => {
     getPostData();
-  }, []);
+  }, );
 
   return (
     <div>
@@ -63,9 +63,15 @@ function Post() {
             </div>
           </div>
         )}
-        
       </div>
 
+      <div className="flex">
+        <div className="flex w-9/12"></div>
+        <div className="flex rounded-2xl border bg-neutral-100 w-28 text-xs font-semibold mt-2 items-center justify-center hover:bg-slate-400">
+            <Link className="items-center py-3 text-black no-underline hover:underline" to={`/post/${id}/answer`}>답변 남기기</Link>
+        </div>
+      </div>
+      
       {post.answers.map((ans) => (
         <div key={ans.id} className="flex items-center justify-center mt-10">
           <div className="rounded-xl border p-5 shadow-xl w-9/12 bg-white">

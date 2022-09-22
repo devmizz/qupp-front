@@ -8,6 +8,9 @@ function Head() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="/">QUPP</Navbar.Brand>
+        <Nav>
+          <Nav.Link href="/question">질문하기</Nav.Link>
+        </Nav>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>

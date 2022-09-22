@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Head from "./views/layout/Head";
 import Post from "./views/posts/Post";
 import Posts from "./views/posts/Posts";
+import Question from "./views/posts/Question";
+import Answer from "./views/posts/Answer";
 
 import Login from "./views/user/Login";
 import SignUp from "./views/user/SignUp";
@@ -18,6 +20,8 @@ function App() {
           <Route path="/" element={<Posts />}></Route>
           <Route path="/posts" element={<Posts />}></Route>
           <Route path="/post/:id" element={<Post />}></Route>
+          <Route path="/question" element={<Question />}></Route>
+          <Route path="/post/:id/answer" element={<Answer />}></Route>
 
           <Route path="/login" element={<Login />}></Route>
           <Route path="/create_account" element={<SignUp />}></Route>

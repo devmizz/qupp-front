@@ -37,7 +37,11 @@ const categories = [
 
 function Posts() {
   const [posts, setPosts] = useState({
-    content: [{}],
+    content: [{
+      question: {
+        user: {}
+      }
+    }],
     totalPages: 0,
   });
 
@@ -53,7 +57,7 @@ function Posts() {
     setSelectedPage(page);
   }
 
-  const getPostsData = async () => {
+  const getPostsData = async (selectedCategory, selectedPage) => {
     const postsData = await getPosts(selectedCategory, selectedPage);
 
     if (postsData) {
@@ -63,7 +67,7 @@ function Posts() {
   };
 
   useEffect(() => {
-    getPostsData();
+    getPostsData(selectedCategory, selectedPage);
   }, [selectedCategory, selectedPage]);
 
   return (
@@ -73,7 +77,7 @@ function Posts() {
           <ul className="flex flex-1 flex-row px-10 rounded-xl">
             {categories.map((category) => (
               <li
-                key={category.text}
+                key={category.id}
                 className={`text-gray-600 flex flex-1 justify-center hover:text-blue-500 focus:outline-none${
                   category.id === selectedCategory
                     ? ` text-blue-500 border-b-2 font-medium border-blue-500`
@@ -98,16 +102,16 @@ function Posts() {
           </tr>
         </thead>
 
-        {posts.content.map((post) => (
-          <tbody key={post?.question?.id}>
+        {posts.content.map((post, index) => (
+          <tbody key={index}>
             <tr>
               <td>
-                <a href={`/post/${post?.question?.id}`}>
-                  {post?.question?.title}
+                <a href={`/post/${post.question?.id}`}>
+                  {post.question.title}
                 </a>
               </td>
-              <td>{post.question?.user?.nickname}</td>
-              <td>{post.question?.registerTime}</td>
+              <td>{post.question.user.nickname}</td>
+              <td>{post.question.registerTime}</td>
             </tr>
           </tbody>
         ))}
