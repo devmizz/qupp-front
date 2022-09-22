@@ -2,67 +2,79 @@ import { useState, useEffect } from "react";
 
 import Table from "react-bootstrap/Table";
 
-import { getPosts } from "../../apis/axios"
+import { getPosts } from "../../apis/axios";
+
+const categories = [
+  {
+    id: 0,
+    text: "전체",
+  },
+  {
+    id: 1,
+    text: "인문",
+  },
+  {
+    id: 2,
+    text: "사회",
+  },
+  {
+    id: 3,
+    text: "상경",
+  },
+  {
+    id: 4,
+    text: "자연",
+  },
+  {
+    id: 5,
+    text: "공학",
+  },
+  {
+    id: 6,
+    text: "예술",
+  },
+];
 
 function Posts() {
   const [posts, setPosts] = useState({
-    content: [{}]
+    content: [{}],
   });
+  const [selectedCategory, setSelectedCategory] = useState(0);
+
+  const onCategoryClick = (id) => setSelectedCategory(id);
 
   const getPostsData = async () => {
     const postsData = await getPosts();
 
-    if(postsData) {
+    if (postsData) {
       setPosts(postsData);
     }
-  }
+    console.log(postsData);
+  };
 
   useEffect(() => {
     getPostsData();
   }, []);
 
-  console.log(posts);
-
   return (
     <div>
-      <div class="bg-white">
-        <nav class="flex flex-col sm:flex-row w-full">
-          <ul class="flex-1 px-10 rounded-xl">
-            <li class="flex-1">
-              <button class="category text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500">
-                  전체
-              </button>
-            </li>
-            <li class="flex-1">
-              <button class="category text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
-                  인문
-              </button>
-            </li>
-            <li class="flex-1">
-              <button class="category text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
-                  사회
-              </button>
-            </li>
-            <li class="flex-1">
-              <button class="category text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
-                  상경
-              </button>
-            </li>
-            <li class="flex-1">
-              <button class="category text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
-                  자연
-              </button>
-            </li>
-            <li class="flex-1">
-              <button class="category text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
-                  공학
-              </button>
-            </li>
-            <li class="flex-1">
-              <button class="category text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
-                  예술
-              </button>
-            </li>
+      <div className="bg-white">
+        <nav className="flex flex-col sm:flex-row w-full">
+          <ul className="flex flex-1 flex-row px-10 rounded-xl">
+            {categories.map((category) => (
+              <li
+                key={category.text}
+                className={`text-gray-600 py-4 px-6 flex flex-1 justify-center hover:text-blue-500 focus:outline-none${
+                  category.id === selectedCategory
+                    ? ` text-blue-500 border-b-2 font-medium border-blue-500`
+                    : ""
+                }`}
+              >
+                <button onClick={() => onCategoryClick(category.id)}>
+                  {category.text}
+                </button>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
@@ -80,7 +92,9 @@ function Posts() {
           <tbody key={post?.question?.id}>
             <tr>
               <td>
-                <a href={`/post/${post?.question?.id}`}>{post?.question?.title}</a>
+                <a href={`/post/${post?.question?.id}`}>
+                  {post?.question?.title}
+                </a>
               </td>
               <td>{post.question?.user?.nickname}</td>
               <td>{post.question?.registerTime}</td>
