@@ -30,7 +30,7 @@ function Post() {
           <div className="rounded-xl border p-5 shadow-xl w-9/12 bg-white">
             <div className="flex w-full items-center justify-between border-b pb-3">
               <div className="flex items-center space-x-3">
-                <div className="text-lg font-bold text-slate-700">[질문]</div>
+                <div className="text-lg font-bold text-slate-700"></div>
                 {/* 이름 */}
                 <div className="text-lg font-bold text-slate-700">
                   {post.question?.user?.nickname}
@@ -57,7 +57,7 @@ function Post() {
 
             <div className="mt-4 mb-6">
               {/* 제목 */}
-              <div className="mb-3 text-xl font-bold">{post.question?.title}</div>
+              <div className="mb-3 text-xl font-bold">[질문] {post.question?.title}</div>
               {/* 내용 */}
               <div className="text-sm text-neutral-600">{post.question?.content}</div>
             </div>
@@ -71,7 +71,7 @@ function Post() {
           <div className="rounded-xl border p-5 shadow-xl w-9/12 bg-white">
             <div className="flex w-full items-center justify-between border-b pb-3">
               <div className="flex items-center space-x-3">
-                <div className="text-lg font-bold text-slate-700">[답변]</div>
+                <div className="text-lg font-bold text-slate-700"></div>
                 {/* 이름 */}
                 <div className="text-lg font-bold text-slate-700">
                   {ans.user.nickname}
@@ -89,6 +89,7 @@ function Post() {
             </div>
 
             <div className="mt-4 mb-6">
+              <div className="mb-3 text-xl font-bold">[답변]</div>
               {/* 내용 */}
               <div className="text-sm text-neutral-600">{ans.content}</div>
             </div>
