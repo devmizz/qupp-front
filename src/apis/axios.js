@@ -6,7 +6,7 @@ export const axiosInstace = axios.create({
 
 export const getPosts = async () => {
   try {
-    const { data } = await axiosInstace.get(`/question`);
+    const { data } = await axiosInstace.get(`/questions`);
 
     return data;
   } catch (error) {
