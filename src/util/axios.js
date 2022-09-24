@@ -30,7 +30,7 @@ export const getPost = async (id) => {
   return null;
 };
 
-export const setPost = async (id, content) => {
+export const setAnswer = async (id, content) => {
   try {
     const { data } = await axiosInstace.post(`/question/${id}/answer`, content);
   } catch (error) {

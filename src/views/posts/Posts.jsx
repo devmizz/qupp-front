@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import Table from "react-bootstrap/Table";
 
-import { getPosts } from "../../apis/axios";
+import { getPosts } from "../../util/axios";
 
 const categories = [
   {
@@ -96,9 +96,9 @@ function Posts() {
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
-            <th>질문</th>
-            <th>작성자</th>
-            <th>등록 시간</th>
+            <th className="w-6/12">질문</th>
+            <th className="w-3/12">작성자</th>
+            <th className="w-3/12">등록 시간</th>
           </tr>
         </thead>
 

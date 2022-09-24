@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import { getPost } from "../../apis/axios"
+import { getPost } from "../../util/axios"
 
 function Post() {
   const { id } = useParams();

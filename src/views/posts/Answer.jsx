@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 
+import { setPosts } from "../../util/axios";
+
 function Write() {
 
   const { id } = useParams();
