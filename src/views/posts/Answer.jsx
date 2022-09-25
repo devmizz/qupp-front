@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { setPosts } from "../../util/axios";
+import { setAnswer } from "../../util/axios";
 
 function Write() {
 
@@ -26,7 +26,7 @@ function Write() {
         >
             등록하기
         </button>
-        </form>
+      </form>
     </div>
   );
 }
