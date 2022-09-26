@@ -1,9 +1,11 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Navigate } from 'react-router-dom'
 
 import { login } from "../../util/axios"
 import { setCookie } from "../../util/cookie"
+
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -28,7 +30,7 @@ function Login() {
     };
     // result = signUp(body);
 
-    console.log(apiCall(body));
+    apiCall(body);
 
     // setCookie("token", result.data.jwtToken);
   }
@@ -37,11 +39,9 @@ function Login() {
     const loginData = await login(body);
 
     if(loginData) {
-      console.log("hihi");
       setCookie("token", loginData.data.jwtToken);
+      return <Navigate to="/" replace />
     }
-
-    return loginData;
   }
 
   return (

@@ -1,11 +1,13 @@
-import { Cookies } from 'react-cookie';
 import { Navigate } from 'react-router-dom'
+
 import { setCookie } from '../../util/cookie';
+import { removeCookie } from '../../util/cookie';
 
 function Logout() {
-  console.log("hihi");
-  setCookie("token", "");
-  return <Navigate to="/" />
+  // setCookie("token", "");
+  removeCookie("token");
+
+  return <Navigate to="/" replace />
 }
 
 export default Logout;

@@ -35,7 +35,7 @@ function SignUp() {
     };
     // result = signUp(body);
 
-    console.log(apiCall(body));
+    apiCall(body);
 
     // setCookie("token", result.data.jwtToken);
   }
@@ -44,11 +44,8 @@ function SignUp() {
     const signUpData = await signUp(body);
 
     if(signUpData) {
-      console.log("hihi");
       setCookie("token", signUpData.data.jwtToken);
     }
-
-    return signUpData;
   }
 
 

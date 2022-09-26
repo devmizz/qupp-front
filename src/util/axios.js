@@ -40,10 +40,10 @@ export const setAnswer = async (id, content) => {
   return data;
 };
 
-export const login = async (json) => {
+export const signUp = async (json) => {
   var data = {};
   try {
-    data = await axiosInstance.post(`/login`, json);
+    data = await axiosInstance.post(`/user`, json);
   } catch (error) {
     console.error(error);
     if (error.response.status === 400) {
@@ -54,15 +54,13 @@ export const login = async (json) => {
   return data;
 };
 
-export const signUp = async (json) => {
+export const login = async (json) => {
   var data = {};
   try {
-    data = await axiosInstance.post(`/user`, json);
+    data = await axiosInstance.post(`/login`, json);
   } catch (error) {
     console.error(error);
-    if (error.response.status === 400) {
-      alert(error.response.data.msg);
-    }
+    alert(error.response.data.msg);
   }
 
   return data;
