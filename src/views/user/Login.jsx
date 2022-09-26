@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { login } from "../../util/axios"
 import { setCookie } from "../../util/cookie"
@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
   const emailHandler = (e) => {
     e.preventDefault();
@@ -40,7 +41,10 @@ function Login() {
 
     if(loginData) {
       setCookie("token", loginData.data.jwtToken);
-      return <Navigate to="/" replace />
+      navigate('/')
+      // 이건 야매임! 새로고침을 해서 강제로 cookie를 읽게 만들어서 자연스러운 flow 형성
+      // 전역 상태 관리 달아서 useAuth에 있는 token 값을 update 해주면 자연스럽게 해당 부분 없어도 동작할것임
+      window.location.reload()
     }
   }
 
