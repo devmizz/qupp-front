@@ -88,7 +88,7 @@ export const postQuestionReply = async (questionId, json) => {
 
 export const postAnswerReply = async (questionId, answerId, json) => {
   try {
-    await axiosInstance.post(
+    return await axiosInstance.post(
       `/question/${questionId}/answer/${answerId}/comment`,
       json
     );
