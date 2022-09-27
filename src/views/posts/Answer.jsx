@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { setAnswer } from "../../util/axios";
+import { postAnswer } from "../../util/axios";
 
 function Write() {
 

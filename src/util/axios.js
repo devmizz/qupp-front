@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "http://ec2-3-37-201-15.ap-northeast-2.compute.amazonaws.com:8080",
+  baseURL: "http://115.85.180.6:8080",
 });
 
 export const getPosts = async (selectedCategory, selectedPage) => {
@@ -30,7 +30,17 @@ export const getPost = async (id) => {
   return null;
 };
 
-export const setAnswer = async (id, content) => {
+export const postQuestion = async (content) => {
+  var data = {};
+  try {
+    data = await axiosInstance.post(`/question`, content);
+  } catch (error) {
+    console.error(error);
+  }
+  return data;
+};
+
+export const postAnswer = async (id, content) => {
   var data = {};
   try {
     data = await axiosInstance.post(`/question/${id}/answer`, content);
