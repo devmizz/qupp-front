@@ -1,10 +1,16 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-
-import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../hooks/authContext";
 
 function Head() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -20,7 +26,10 @@ function Head() {
             {isAuthenticated ? (
               <>
                 <Nav.Link href="/mypage">마이페이지</Nav.Link>
-                <Nav.Link href="/logout">로그아웃</Nav.Link>
+                {/* <Nav.Link href="/logout">로그아웃</Nav.Link> */}
+                <button onClick={handleLogout} style={{ color: "white" }}>
+                  로그아웃
+                </button>
               </>
             ) : (
               <>
