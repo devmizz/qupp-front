@@ -18,6 +18,16 @@ export const getPosts = async (selectedCategory, selectedPage) => {
   return null;
 };
 
+export const getMyPosts = async (id, page) => {
+  try {
+    return await axiosInstance.get(`/user/${id}/questions?page=${page}`);
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
+
+  return null;
+};
+
 export const getPost = async (id) => {
   try {
     const { data } = await axiosInstance.get(`/question/${id}`);
@@ -92,6 +102,14 @@ export const postAnswerReply = async (questionId, answerId, json) => {
       `/question/${questionId}/answer/${answerId}/comment`,
       json
     );
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
+};
+
+export const updateUserInfo = async (id, json) => {
+  try {
+    return await axiosInstance.put(`user/${id}`, json);
   } catch (error) {
     alert(error.response.data.msg);
   }

@@ -19,7 +19,7 @@ function Head() {
           <Nav>
             {isAuthenticated ? (
               <>
-                <Nav.Link href="/mypage">마이페이지</Nav.Link>
+                <Nav.Link href="/my_page">마이페이지</Nav.Link>
                 <Nav.Link href="/logout">로그아웃</Nav.Link>
               </>
             ) : (

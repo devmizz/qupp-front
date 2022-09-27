@@ -1,14 +1,12 @@
-import Col from "react-bootstrap/Col";
-import Nav from "react-bootstrap/Nav";
-import Row from "react-bootstrap/Row";
-import Tab from "react-bootstrap/Tab";
+import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav';
+import Row from 'react-bootstrap/Row';
+import Tab from 'react-bootstrap/Tab';
+
+import MyInfo from '../../components/user/MyInfo';
+import MyQuestions from '../../components/user/MyQuestions';
 
 function MyPage() {
-  const myInfo = "내 정보";
-  const question = "질문글";
-  const answer = "답변글";
-  const reply = "댓글";
-
   return (
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
       <Row>
@@ -30,10 +28,14 @@ function MyPage() {
         </Col>
         <Col sm={9}>
           <Tab.Content>
-            <Tab.Pane eventKey="info">{myInfo}</Tab.Pane>
-            <Tab.Pane eventKey="question">{question}</Tab.Pane>
-            <Tab.Pane eventKey="answer">{answer}</Tab.Pane>
-            <Tab.Pane eventKey="reply">{reply}</Tab.Pane>
+            <Tab.Pane eventKey="info">
+              <MyInfo />
+            </Tab.Pane>
+            <Tab.Pane eventKey="question">
+              <MyQuestions />
+            </Tab.Pane>
+            <Tab.Pane eventKey="answer"></Tab.Pane>
+            <Tab.Pane eventKey="reply"></Tab.Pane>
           </Tab.Content>
         </Col>
       </Row>
