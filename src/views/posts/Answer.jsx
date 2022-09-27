@@ -1,14 +1,43 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 
 import { postAnswer } from "../../util/axios";
 
 function Write() {
 
+  const navigate = useNavigate();
+
   const { id } = useParams();
+
+  const [message, setMessage] = useState('');
+
+  const handleMessageChange = e => {
+    e.preventDefault();
+    setMessage(e.target.value);
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    let body = {
+      author: JSON.parse(localStorage.getItem('userNickname')),
+      content: message,
+    }
+
+    const res = apiCall(body);
+
+    console.log(res.status);
+
+    navigate(`/post/${id}`)
+  }
+
+  async function apiCall(body) {
+    return postAnswer(id, body);
+  }
 
   return (
     <div className="max-w-2xl mx-auto mt-3">
-      <form>
+      <form onSubmit={ submitHandler }>
         <div className="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
             <div className="flex justify-between items-center py-2 px-3 border-b dark:border-gray-600">
                 <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600 text-slate-50 text-[20px] font-bold">
@@ -17,7 +46,15 @@ function Write() {
             </div>
             <div className="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800">
                 <label htmlFor="editor" className="sr-only"></label>
-                <textarea id="editor" rows="8" className="block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:placeholder-gray-400" placeholder="질문을 입력해주세요" required></textarea>
+                <textarea 
+                  id="editor" 
+                  rows="8" 
+                  className="block px-0 w-full text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:placeholder-gray-400" 
+                  placeholder="답변을 입력해주세요"
+                  value = {message}
+                  onChange = {handleMessageChange}
+                  required>
+                  </textarea>
             </div>
         </div>
         <button 

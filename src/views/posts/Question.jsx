@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import { postQuestion } from "../../util/axios"
+import { postQuestion } from '../../util/axios'
 
 function Question() {
 
@@ -40,11 +40,7 @@ function Question() {
     const res = apiCall(body);
 
     console.log(res.status);
-
-    if(res.status === 200) {
-      console.log("hihi");
-      navigate('/');
-    }
+    navigate('/');
   }
 
   async function apiCall(body) {
