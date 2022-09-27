@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: "http://115.85.180.6:8080",
+  baseURL: 'http://115.85.180.6:8080',
 });
 
 export const getPosts = async (selectedCategory, selectedPage) => {
@@ -74,4 +74,23 @@ export const login = async (json) => {
   }
 
   return data;
+};
+
+export const postQuestionReply = async (questionId, json) => {
+  try {
+    await axiosInstance.post(`/question/${questionId}/comment`, json);
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
+};
+
+export const postAnswerReply = async (questionId, answerId, json) => {
+  try {
+    await axiosInstance.post(
+      `/question/${questionId}/answer/${answerId}/comment`,
+      json
+    );
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
 };

@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import { getPost } from "../../util/axios"
+import { getPost, postQuestionReply } from "../../util/axios"
+
 import { getReply } from "./Reply"
 
 function Post() {
@@ -14,6 +15,13 @@ function Post() {
     answers: []
   });
 
+  const [reply, setReply] = useState('');
+
+  const handleReplyChange = (e) => {
+    e.preventDefault();
+    setReply(e.target.value);
+  }
+
   const getPostData = async () => {
     const postData = await getPost(id);
 
@@ -24,9 +32,20 @@ function Post() {
     }
   }
 
+  const questionReplySubmitHandler = (e) => {
+    e.preventDefault();
+
+    let body = {
+      author: JSON.parse(localStorage.getItem('userNickname')),
+      comment: reply
+    }
+
+    postQuestionReply(post.question.id, body);
+  }
+
   useEffect(() => {
     getPostData();
-  }, []);
+  }, [questionReplySubmitHandler]);
 
   return (
     <div>
@@ -72,30 +91,31 @@ function Post() {
         <div className="mt-3 w-full">
           {getReply(post.question.comments)}
         </div>
-      </div>
-      
-      {/* 질문의 댓글 */}
-      {/* <div>
-        <form>
-          <div className="mb-6">
-            <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
-            <input 
-              type="reply"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-              placeholder="댓글을 남겨주세요" 
-              value = { reply }
-              onChange = { handleReplyChange }
-              required
-            />
-          </div>
-          <button 
-            type="submit" 
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+
+        <div className="flex align-center justify-center w-full">
+          <form 
+            onSubmit={questionReplySubmitHandler} 
+            className="flex w-10/12 align-center justify-center"
           >
-            댓글쓰기
-          </button>
-        </form>
-      </div> */}
+            <div className="flex fex-between mb-6 w-full align-center justify-center">
+              <input 
+                type="reply"
+                className="w-9/12 mt-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                placeholder="댓글을 남겨주세요" 
+                value = { reply }
+                onChange = { handleReplyChange }
+                required
+              />
+              <button 
+                type="submit" 
+                className="w-3/12 align-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-3 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                댓글 남기기
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
 
       <div className="flex">
         <div className="flex w-9/12"></div>

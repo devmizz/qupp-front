@@ -5,6 +5,8 @@ import { removeCookie } from '../../util/cookie';
 function Logout() {
   removeCookie("token");
 
+  localStorage.clear();
+
   return <Navigate to="/" replace />
 }
 
