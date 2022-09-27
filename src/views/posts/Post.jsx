@@ -6,6 +6,7 @@ import { getPost, postQuestionReply } from "../../util/axios"
 import { getReply } from "./Reply"
 
 function Post() {
+
   const { id } = useParams();
 
   const [post, setPost] = useState({
@@ -23,13 +24,7 @@ function Post() {
   }
 
   const getPostData = async () => {
-    const postData = await getPost(id);
-
-    console.log(postData);
-
-    if(postData) {
-      setPost(postData);
-    }
+    getPost(id).then(r => setPost(r));
   }
 
   const questionReplySubmitHandler = (e) => {
@@ -41,11 +36,13 @@ function Post() {
     }
 
     postQuestionReply(post.question.id, body);
+
+    setReply("");
   }
 
   useEffect(() => {
     getPostData();
-  }, [questionReplySubmitHandler]);
+  }, [post]);
 
   return (
     <div>

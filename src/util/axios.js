@@ -78,10 +78,12 @@ export const login = async (json) => {
 
 export const postQuestionReply = async (questionId, json) => {
   try {
-    await axiosInstance.post(`/question/${questionId}/comment`, json);
+    return await axiosInstance.post(`/question/${questionId}/comment`, json);
   } catch (error) {
     alert(error.response.data.msg);
   }
+
+  return {};
 };
 
 export const postAnswerReply = async (questionId, answerId, json) => {
