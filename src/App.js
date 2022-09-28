@@ -1,16 +1,17 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Head from "./views/layout/Head";
-import Post from "./views/posts/Post";
-import Posts from "./views/posts/Posts";
-import Question from "./views/posts/Question";
-import Answer from "./views/posts/Answer";
+import Head from './views/layout/Head';
+import Post from './views/posts/Post';
+import Posts from './views/posts/Posts';
+import Question from './views/posts/Question';
+import Answer from './views/posts/Answer';
+import UpdatePost from './views/posts/UpdatePost';
 
-import Login from "./views/user/Login";
-import Logout from "./views/user/Logout";
-import SignUp from "./views/user/SignUp";
-import MyPage from "./views/user/MyPage";
+import Login from './views/user/Login';
+import Logout from './views/user/Logout';
+import SignUp from './views/user/SignUp';
+import MyPage from './views/user/MyPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/post/:id" element={<Post />}></Route>
           <Route path="/question" element={<Question />}></Route>
           <Route path="/post/:id/answer" element={<Answer />}></Route>
+          <Route path="/update_post" element={<UpdatePost />}></Route>
 
           <Route path="/login" element={<Login />}></Route>
           <Route path="/logout" element={<Logout />}></Route>

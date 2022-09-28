@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import Table from 'react-bootstrap/Table';
 
-import { getMyPosts } from '../../util/axios';
+import { getMyQuestions } from '../../util/axios';
 
 function MyQuestions() {
   const [posts, setPosts] = useState({});
@@ -13,7 +13,7 @@ function MyQuestions() {
   };
 
   const getPostsData = async (selectedPage) => {
-    const postsData = await getMyPosts(
+    const postsData = await getMyQuestions(
       localStorage.getItem('userId'),
       selectedPage
     );

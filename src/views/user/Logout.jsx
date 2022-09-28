@@ -1,13 +1,15 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 
 import { removeCookie } from '../../util/cookie';
 
 function Logout() {
-  removeCookie("token");
+  removeCookie('token');
 
-  localStorage.clear();
+  localStorage.removeItem('userId');
+  localStorage.removeItem('userEmail');
+  localStorage.removeItem('userNickname');
 
-  return <Navigate to="/" replace />
+  return <Navigate to="/" replace />;
 }
 
 export default Logout;

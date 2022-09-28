@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { postQuestion } from '../../util/axios';
 
-function Question() {
+function UpdatePost() {
   const navigate = useNavigate();
 
   const [message, setMessage] = useState('');
@@ -109,4 +109,4 @@ function Question() {
   );
 }
 
-export default Question;
+export default UpdatePost;

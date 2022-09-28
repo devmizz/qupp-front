@@ -4,11 +4,9 @@ export const axiosInstance = axios.create({
   baseURL: 'http://115.85.180.6:8080',
 });
 
-export const getPosts = async (selectedCategory, selectedPage) => {
+export const getPost = async (id) => {
   try {
-    const { data } = await axiosInstance.get(
-      `/questions?page=${selectedPage - 1}&category=${selectedCategory}`
-    );
+    const { data } = await axiosInstance.get(`/question/${id}`);
 
     return data;
   } catch (error) {
@@ -18,19 +16,11 @@ export const getPosts = async (selectedCategory, selectedPage) => {
   return null;
 };
 
-export const getMyPosts = async (id, page) => {
+export const getPosts = async (selectedCategory, selectedPage) => {
   try {
-    return await axiosInstance.get(`/user/${id}/questions?page=${page}`);
-  } catch (error) {
-    alert(error.response.data.msg);
-  }
-
-  return null;
-};
-
-export const getPost = async (id) => {
-  try {
-    const { data } = await axiosInstance.get(`/question/${id}`);
+    const { data } = await axiosInstance.get(
+      `/questions?page=${selectedPage - 1}&category=${selectedCategory}`
+    );
 
     return data;
   } catch (error) {
@@ -107,9 +97,43 @@ export const postAnswerReply = async (questionId, answerId, json) => {
   }
 };
 
+export const updateReply = async (id, json) => {
+  try {
+    return await axiosInstance.put(`/comment/${id}`, json);
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
+};
+
+export const deleteReply = async (id) => {
+  try {
+    return await axiosInstance.delete(`/comment/${id}`);
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
+};
+
 export const updateUserInfo = async (id, json) => {
   try {
     return await axiosInstance.put(`user/${id}`, json);
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
+};
+
+export const getMyQuestions = async (id, page) => {
+  try {
+    return await axiosInstance.get(`/user/${id}/questions?page=${page}`);
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
+
+  return null;
+};
+
+export const deletePost = async (id, qa) => {
+  try {
+    return await axiosInstance.delete(`/${qa}/${id}`);
   } catch (error) {
     alert(error.response.data.msg);
   }

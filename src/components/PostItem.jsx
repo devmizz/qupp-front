@@ -1,5 +1,9 @@
 import { useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+
 import Comments from './Comments';
+import Question from '../views/posts/Question';
+import { deletePost } from '../util/axios';
 
 function PostItem({ item, onSubmit }) {
   const {
@@ -12,6 +16,9 @@ function PostItem({ item, onSubmit }) {
     user,
     comments,
   } = item;
+
+  const location = useLocation();
+
   const [inputValue, setInputValue] = useState('');
 
   const handleInputValueChange = (e) => {
@@ -23,6 +30,25 @@ function PostItem({ item, onSubmit }) {
 
     onSubmit(id, inputValue);
     setInputValue('');
+  };
+
+  const onPostUpdateClick = (id) => {
+    <Navigate to="/" replace />;
+  };
+
+  const onPostDeleteClick = async (id) => {
+    var qa = 'answer';
+    var url = location.pathname;
+    if (title) {
+      qa = 'question';
+      url = '/';
+    }
+
+    const res = await deletePost(id, qa);
+
+    if (res.status === 204) {
+      window.location.replace(url);
+    }
   };
 
   return (
@@ -53,7 +79,23 @@ function PostItem({ item, onSubmit }) {
         </div>
 
         <div className="mt-4 mb-6">
-          {title && <div className="mb-3 text-xl font-bold">{title}</div>}
+          <div className="flex justify-between">
+            {title && (
+              <div className="mb-3 text-xl font-bold">[질문] {title}</div>
+            )}
+            <div></div>
+            {user.nickname ===
+              JSON.parse(localStorage.getItem('userNickname')) && (
+              <div className="inline-block float-right justify-between">
+                <button className="mx-2" onClick={() => onPostUpdateClick(id)}>
+                  수정
+                </button>
+                <button className="mx-2" onClick={() => onPostDeleteClick(id)}>
+                  삭제
+                </button>
+              </div>
+            )}
+          </div>
           {/* 내용 */}
           <div className="text-sm text-neutral-600">{content}</div>
         </div>
