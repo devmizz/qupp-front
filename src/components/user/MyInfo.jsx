@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { updateUserInfo } from '../../util/axios';
+import { updateUserEmail, updateUserNickname } from '../../util/axios';
 
 function MyInfo() {
   const [updateEmail, setUpdateEmail] = useState('');
@@ -14,30 +14,30 @@ function MyInfo() {
     setUpdateNickname(e.target.value);
   };
 
-  const handleNicknameSubmit = (e) => {
+  const handleNicknameSubmit = async (e) => {
     e.preventDefault();
 
     const body = {
-      email: JSON.parse(localStorage.getItem('userEmail')),
       nickname: updateNickname,
     };
 
-    const res = updateUserInfo(localStorage.getItem('userId'), body);
+    const res = await updateUserNickname(localStorage.getItem('userId'), body);
 
-    console.log(res);
+    localStorage.setItem('userNickname', JSON.stringify(res.data.nickname));
+    setUpdateNickname('');
   };
 
-  const handleEmailSubmit = (e) => {
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
 
     const body = {
       email: updateEmail,
-      nickname: JSON.parse(localStorage.getItem('userNickname')),
     };
 
-    const res = updateUserInfo(localStorage.getItem('userId'), body);
+    const res = await updateUserEmail(localStorage.getItem('userId'), body);
 
-    console.log(res);
+    localStorage.setItem('userEmail', JSON.stringify(res.data.email));
+    setUpdateEmail('');
   };
 
   return (
@@ -52,7 +52,7 @@ function MyInfo() {
                 <form className="flex" onSubmit={handleEmailSubmit}>
                   <input
                     type="email"
-                    placeholder="변경할 닉네임"
+                    placeholder="변경할 이메일"
                     className="flex items-center justify-center w-6/12"
                     value={updateEmail}
                     onChange={handleInputUpdateEmail}

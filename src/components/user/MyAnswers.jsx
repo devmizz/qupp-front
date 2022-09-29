@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 
 import Table from 'react-bootstrap/Table';
 
-import { getMyQuestions } from '../../util/axios';
+import { getMyAnswers } from '../../util/axios';
 
-function MyQuestions() {
+function MyAnswers() {
   const [posts, setPosts] = useState({
     data: { content: [{ user: {} }] },
   });
@@ -15,7 +15,7 @@ function MyQuestions() {
   };
 
   const getPostsData = async (selectedPage) => {
-    const postsData = await getMyQuestions(
+    const postsData = await getMyAnswers(
       localStorage.getItem('userId'),
       selectedPage
     );
@@ -70,4 +70,4 @@ function MyQuestions() {
   );
 }
 
-export default MyQuestions;
+export default MyAnswers;

@@ -1,13 +1,29 @@
+import { useEffect } from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { postQuestion } from '../../util/axios';
+import { getPost, postQuestion, putQuestion } from '../../util/axios';
 
 function Question() {
   const navigate = useNavigate();
 
-  const [message, setMessage] = useState('');
+  const { id } = useParams();
+
+  const [exist, setExist] = useState(false);
+
+  useEffect(() => {
+    if (!exist) {
+      getPost(id).then((data) => {
+        setTitle(data.question.title);
+        setMessage(data.question.content);
+        setCollege(data.question.category);
+        setExist(true);
+      });
+    }
+  }, []);
+
   const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
   const [college, setCollege] = useState('Humanities');
 
   const handleMessageChange = (e) => {
@@ -22,10 +38,12 @@ function Question() {
 
   const handleCollegeChange = (e) => {
     e.preventDefault();
-    setCollege(e.target.value);
+    if (!exist) {
+      setCollege(e.target.value);
+    }
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     let body = {
@@ -36,16 +54,16 @@ function Question() {
       content: message,
     };
 
-    const res = apiCall(body);
+    const res = await apiCall(body);
 
-    console.log(res.status);
-    navigate('/');
+    navigate(`/post/${res.data.question.id}`);
   };
 
   async function apiCall(body) {
-    const res = await postQuestion(body);
-
-    return res;
+    if (exist) {
+      return await putQuestion(id, body);
+    }
+    return await postQuestion(body);
   }
 
   return (

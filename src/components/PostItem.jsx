@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 import Comments from './Comments';
-import Question from '../views/posts/Question';
 import { deletePost } from '../util/axios';
 
 function PostItem({ item, onSubmit }) {
@@ -30,10 +29,6 @@ function PostItem({ item, onSubmit }) {
 
     onSubmit(id, inputValue);
     setInputValue('');
-  };
-
-  const onPostUpdateClick = (id) => {
-    <Navigate to="/" replace />;
   };
 
   const onPostDeleteClick = async (id) => {
@@ -87,9 +82,31 @@ function PostItem({ item, onSubmit }) {
             {user.nickname ===
               JSON.parse(localStorage.getItem('userNickname')) && (
               <div className="inline-block float-right justify-between">
-                <button className="mx-2" onClick={() => onPostUpdateClick(id)}>
-                  수정
-                </button>
+                {title && (
+                  <Link
+                    to={{
+                      pathname: `/question/${id}`,
+                    }}
+                    className="no-underline text-black"
+                  >
+                    수정
+                  </Link>
+                )}
+
+                {!title && (
+                  <Link
+                    to={{
+                      pathname: `/post/${location.pathname.replace(
+                        '/post/',
+                        ''
+                      )}/answer/${id}`,
+                    }}
+                    className="no-underline text-black"
+                  >
+                    수정
+                  </Link>
+                )}
+
                 <button className="mx-2" onClick={() => onPostDeleteClick(id)}>
                   삭제
                 </button>

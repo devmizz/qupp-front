@@ -35,10 +35,9 @@ function Login() {
 
   async function apiCall(body) {
     const loginData = await login(body);
-    let token = '';
 
     if (loginData) {
-      token = loginData.data.jwtToken;
+      const token = loginData.data.jwtToken;
 
       let user = loginData.data.responseUser;
 
@@ -52,8 +51,6 @@ function Login() {
       // 전역 상태 관리 달아서 useAuth에 있는 token 값을 update 해주면 자연스럽게 해당 부분 없어도 동작할것임
       window.location.reload();
     }
-
-    return token;
   }
 
   return (

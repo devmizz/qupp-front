@@ -1,7 +1,11 @@
 import axios from 'axios';
+import { getCookie } from './cookie';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://115.85.180.6:8080',
+  headers: {
+    Authorization: `Bearer ${getCookie('token')}`,
+  },
 });
 
 export const getPost = async (id) => {
@@ -40,6 +44,16 @@ export const postQuestion = async (content) => {
   return data;
 };
 
+export const putQuestion = async (id, content) => {
+  var data = {};
+  try {
+    data = await axiosInstance.put(`/question/${id}`, content);
+  } catch (error) {
+    console.error(error);
+  }
+  return data;
+};
+
 export const postAnswer = async (id, content) => {
   var data = {};
   try {
@@ -48,6 +62,14 @@ export const postAnswer = async (id, content) => {
     console.error(error);
   }
   return data;
+};
+
+export const putAnswer = async (id, content) => {
+  try {
+    return await axiosInstance.put(`/answer/${id}`, content);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const signUp = async (json) => {
@@ -113,9 +135,17 @@ export const deleteReply = async (id) => {
   }
 };
 
-export const updateUserInfo = async (id, json) => {
+export const updateUserNickname = async (id, json) => {
   try {
-    return await axiosInstance.put(`user/${id}`, json);
+    return await axiosInstance.put(`/user/${id}/updateNickname`, json);
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
+};
+
+export const updateUserEmail = async (id, json) => {
+  try {
+    return await axiosInstance.put(`/user/${id}/updateEmail`, json);
   } catch (error) {
     alert(error.response.data.msg);
   }
@@ -123,7 +153,27 @@ export const updateUserInfo = async (id, json) => {
 
 export const getMyQuestions = async (id, page) => {
   try {
-    return await axiosInstance.get(`/user/${id}/questions?page=${page}`);
+    return await axiosInstance.get(`/user/${id}/questions?page=${page - 1}`);
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
+
+  return null;
+};
+
+export const getMyAnswers = async (id, page) => {
+  try {
+    return await axiosInstance.get(`/user/${id}/answers?page=${page - 1}`);
+  } catch (error) {
+    alert(error.response.data.msg);
+  }
+
+  return null;
+};
+
+export const getMyReplys = async (id, page) => {
+  try {
+    return await axiosInstance.get(`/user/${id}/comments?page=${page - 1}`);
   } catch (error) {
     alert(error.response.data.msg);
   }

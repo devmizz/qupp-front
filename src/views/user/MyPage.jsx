@@ -5,6 +5,8 @@ import Tab from 'react-bootstrap/Tab';
 
 import MyInfo from '../../components/user/MyInfo';
 import MyQuestions from '../../components/user/MyQuestions';
+import MyAnswers from '../../components/user/MyAnswers';
+import MyReplys from '../../components/user/MyReplys';
 
 function MyPage() {
   return (
@@ -34,8 +36,12 @@ function MyPage() {
             <Tab.Pane eventKey="question">
               <MyQuestions />
             </Tab.Pane>
-            <Tab.Pane eventKey="answer"></Tab.Pane>
-            <Tab.Pane eventKey="reply"></Tab.Pane>
+            <Tab.Pane eventKey="answer">
+              <MyAnswers />
+            </Tab.Pane>
+            <Tab.Pane eventKey="reply">
+              <MyReplys />
+            </Tab.Pane>
           </Tab.Content>
         </Col>
       </Row>
