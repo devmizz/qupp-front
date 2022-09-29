@@ -10,11 +10,6 @@ function Post() {
   const [post, setPost] = useState(null);
   const userNickname = localStorage.getItem('userNickname');
 
-  const getPostData = async () => {
-    const data = await getPost(id);
-    setPost(data);
-  };
-
   const handleQuestionReply = (id, inputValue) => {
     if (!userNickname) return;
 
@@ -42,8 +37,8 @@ function Post() {
   };
 
   useEffect(() => {
-    getPostData();
-  }, []);
+    getPost(id).then((data) => setPost(data));
+  }, [id]);
 
   if (!post) return null;
 

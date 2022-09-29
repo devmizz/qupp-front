@@ -20,7 +20,7 @@ function Question() {
         setExist(true);
       });
     }
-  }, []);
+  }, [id, exist]);
 
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');

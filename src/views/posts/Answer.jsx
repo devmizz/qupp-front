@@ -20,11 +20,12 @@ function Answer() {
             setMessage(answer.content);
             setExist(true);
           }
+          return 0;
         });
         setExist(true);
       });
     }
-  }, [exist]);
+  }, [aid, qid, exist]);
 
   const [message, setMessage] = useState('');
 
