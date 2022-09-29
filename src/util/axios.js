@@ -5,6 +5,7 @@ export const axiosInstance = axios.create({
   baseURL: 'http://115.85.180.6:8080',
   headers: {
     Authorization: `Bearer ${getCookie('token')}`,
+    withCredentials: true,
   },
 });
 
