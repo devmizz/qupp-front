@@ -43,16 +43,15 @@ function Answer() {
     };
 
     const post = location.pathname.replace('/post/', '').replace('/answer', '');
-    console.log(post);
     const postId = post.substring(0, post.lastIndexOf('/'));
-    console.log(postId);
 
     apiCall(body);
 
-    if (post.indexOf('/') > -1) {
+    if (post.indexOf('/') > 0) {
+      navigate(`/post/${postId}`);
+    } else {
       navigate(`/post/${post}`);
     }
-    navigate(`/post/${postId}`);
   };
 
   async function apiCall(body) {
