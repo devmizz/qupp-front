@@ -50,9 +50,9 @@ function Answer() {
     apiCall(body);
 
     if (post.indexOf('/') > -1) {
-      navigate(`/post/${postId}`);
+      navigate(`/post/${post}`);
     }
-    navigate(`/post/${post}`);
+    navigate(`/post/${postId}`);
   };
 
   async function apiCall(body) {
