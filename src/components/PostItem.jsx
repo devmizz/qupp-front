@@ -114,7 +114,9 @@ function PostItem({ item, onSubmit }) {
             )}
           </div>
           {/* 내용 */}
-          <div className="text-sm text-neutral-600">{content}</div>
+          <div className="text-sm text-neutral-600">
+            <pre>{content}</pre>
+          </div>
         </div>
       </div>
 
