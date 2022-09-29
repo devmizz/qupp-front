@@ -2,10 +2,13 @@ import axios from 'axios';
 import { getCookie } from './cookie';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://115.85.180.6:8080',
+  // baseURL: 'https://qupp.ddnsking.com:443',
+  baseURL: 'http://qupp.ddnsking.com:8080',
+  // baseURL: 'https://qupp.ddnsking.com:8080',
+  // baseURL: 'http://115.85.180.6:8080',
   headers: {
     Authorization: `Bearer ${getCookie('token')}`,
-    withCredentials: true,
+    // withCredentials: true,
   },
 });
 
