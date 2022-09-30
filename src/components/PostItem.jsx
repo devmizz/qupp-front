@@ -131,7 +131,7 @@ function PostItem({ item, onSubmit }) {
           <div className="flex w-full gap-4 flex-1 mt-6 mb-6 align-center justify-between">
             <input
               type="reply"
-              className="flex-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="flex-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-slate-500 dark:border-gray-400 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="댓글을 남겨주세요"
               value={inputValue}
               onChange={handleInputValueChange}

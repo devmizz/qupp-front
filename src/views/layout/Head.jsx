@@ -1,16 +1,16 @@
-import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import React from 'react';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 
-import useAuth from "../../hooks/useAuth";
+import useAuth from '../../hooks/useAuth';
 
 function Head() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" className="bg-gray-500">
       <Container>
         <Navbar.Brand href="/">QUPP</Navbar.Brand>
-        <Nav>
+        <Nav className="text-white font-bold">
           <Nav.Link href="/question">질문하기</Nav.Link>
         </Nav>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

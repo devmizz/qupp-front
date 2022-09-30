@@ -31,7 +31,7 @@ function MyReplys() {
 
   return (
     <div>
-      <Table striped bordered hover variant="dark">
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th className="w-4/12">질문</th>
@@ -45,7 +45,12 @@ function MyReplys() {
           <tbody key={index}>
             <tr>
               <td>
-                <a href={`/post/${post.id}`}>{post.title}</a>
+                <a
+                  className="text-slate-700 no-underline"
+                  href={`/post/${post.id}`}
+                >
+                  {post.title}
+                </a>
               </td>
               <td>{post.category}</td>
               <td>{post.user.nickname}</td>

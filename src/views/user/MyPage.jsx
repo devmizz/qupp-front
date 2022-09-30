@@ -10,10 +10,14 @@ import MyReplys from '../../components/user/MyReplys';
 
 function MyPage() {
   return (
-    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+    <Tab.Container
+      id="left-tabs-example"
+      defaultActiveKey="info"
+      className="flex container justify-center items-center"
+    >
       <Row>
-        <Col sm={3}>
-          <Nav variant="pills" className="flex-column">
+        <Col sm={2}>
+          <Nav justify variant="pills" className="flex-column">
             <Nav.Item>
               <Nav.Link eventKey="info">내 정보</Nav.Link>
             </Nav.Item>
