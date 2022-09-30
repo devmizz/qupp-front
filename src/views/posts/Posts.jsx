@@ -72,7 +72,7 @@ function Posts() {
   }, [selectedCategory, selectedPage]);
 
   return (
-    <div>
+    <div className="container">
       <div className="bg-white">
         <nav className="flex flex-col sm:flex-row w-full">
           <ul className="flex flex-1 flex-row px-10 rounded-xl">
@@ -97,7 +97,7 @@ function Posts() {
         </nav>
       </div>
 
-      <Table striped bordered hover variant="dark">
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th className="w-6/12">질문</th>
@@ -110,7 +110,12 @@ function Posts() {
           <tbody key={index}>
             <tr>
               <td>
-                <a href={`/post/${post.question?.id}`}>{post.question.title}</a>
+                <a
+                  className="no-underline text-black"
+                  href={`/post/${post.question?.id}`}
+                >
+                  {post.question.title}
+                </a>
               </td>
               <td>{post.question.user.nickname}</td>
               <td>{post.question.registerTime}</td>

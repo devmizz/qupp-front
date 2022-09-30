@@ -54,31 +54,36 @@ function Login() {
   }
 
   return (
-    <Form onSubmit={submitHandler}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>이메일</Form.Label>
-        <Form.Control
-          type="email"
-          value={email}
-          onChange={emailHandler}
-          placeholder="Enter email"
-        />
-      </Form.Group>
+    <div className="flex justify-center mt-3 container">
+      <Form
+        className="flex flex-col w-4/12 justify-center align-middle"
+        onSubmit={submitHandler}
+      >
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>이메일</Form.Label>
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={emailHandler}
+            placeholder="Enter email"
+          />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>비밀번호</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={passwordHandler}
-          placeholder="Password"
-        />
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>비밀번호</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={passwordHandler}
+            placeholder="Password"
+          />
+        </Form.Group>
 
-      <Button variant="primary" type="submit">
-        로그인
-      </Button>
-    </Form>
+        <Button variant="primary" type="submit">
+          로그인
+        </Button>
+      </Form>
+    </div>
   );
 }
 
