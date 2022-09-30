@@ -70,8 +70,8 @@ function Answer() {
     <div className="max-w-2xl mx-auto mt-3">
       <form onSubmit={submitHandler}>
         <div className="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-          <div className="flex justify-between items-center py-2 px-3 border-b dark:border-gray-600">
-            <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600 text-slate-50 text-[20px] font-bold">
+          <div className="flex justify-between items-center py-2 px-3 border-b dark:border-gray-200 bg-slate-50">
+            <div className="flex flex-wrap text-slate-600 items-center divide-gray-200 sm:divide-x dark:divide-gray-600 text-[20px] font-bold">
               답변하기
             </div>
           </div>
