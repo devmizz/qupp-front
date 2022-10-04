@@ -16,10 +16,10 @@ const MyPage = () => {
       <div id="sidebar" className="w-2/12">
         <Sidebar onClickMenu={onClickMenu} />
       </div>
-      <div id="content" className="w-10/12">
-        {console.log(menu)}
-        {menu ? <Post menu={menu} /> : <Info />}
+      <div id="content" className="w-8/12">
+        {menu === 'info' ? <Info /> : <Post menu={menu} />}
       </div>
+      <div className="w-2/12"></div>
     </div>
   );
 };

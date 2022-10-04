@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const menus = [
   {
-    id: null,
+    id: 'info',
     text: '내정보',
   },
   {
