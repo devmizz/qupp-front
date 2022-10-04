@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const menus = [
   {
-    id: 'info',
+    id: null,
     text: '내정보',
   },
   {

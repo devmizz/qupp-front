@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { updateUserEmail, updateUserNickname } from '../../util/axios';
 
-function MyInfo() {
+const Info = () => {
   const [updateEmail, setUpdateEmail] = useState('');
   const [updateNickname, setUpdateNickname] = useState('');
 
@@ -100,6 +100,6 @@ function MyInfo() {
       </div>
     </div>
   );
-}
+};
 
-export default MyInfo;
+export default Info;

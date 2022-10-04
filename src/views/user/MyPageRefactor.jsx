@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+
 import Sidebar from '../../components/user/Sidebar';
-import Content from '../../components/user/Content';
+import Info from '../../components/user/Info';
+import Post from '../../components/user/Post';
 
 const MyPage = () => {
-  const [menu, setMenu] = useState('info');
+  const [menu, setMenu] = useState();
 
   const onClickMenu = (id) => {
     setMenu(id);
@@ -15,7 +17,8 @@ const MyPage = () => {
         <Sidebar onClickMenu={onClickMenu} />
       </div>
       <div id="content" className="w-10/12">
-        <Content menu={menu} />
+        {console.log(menu)}
+        {menu ? <Post menu={menu} /> : <Info />}
       </div>
     </div>
   );
