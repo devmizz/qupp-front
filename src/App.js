@@ -11,7 +11,7 @@ import UpdatePost from './views/posts/UpdatePost';
 import Login from './views/user/Login';
 import Logout from './views/user/Logout';
 import SignUp from './views/user/SignUp';
-import MyPage from './views/user/MyPage';
+import MyPage from './views/user/MyPageRefactor';
 
 function App() {
   return (
