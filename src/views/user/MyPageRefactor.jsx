@@ -5,7 +5,7 @@ import Info from '../../components/user/Info';
 import Post from '../../components/user/Post';
 
 const MyPage = () => {
-  const [menu, setMenu] = useState();
+  const [menu, setMenu] = useState('info');
 
   const onClickMenu = (id) => {
     setMenu(id);
