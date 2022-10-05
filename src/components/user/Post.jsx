@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import { useNavigate } from 'react-router-dom';
 
 import { getMyQuestions, getMyAnswers, getMyComments } from '../../util/axios';
+import Pagination from '../Pagination';
 
 const Post = ({ menu }) => {
   const navigate = useNavigate();
@@ -11,27 +12,27 @@ const Post = ({ menu }) => {
   const [posts, setPosts] = useState({
     content: [
       {
-        id: Number,
-        title: String,
-        content: String,
-        category: String,
-        registerTime: String,
-        updateTime: String,
+        id: undefined,
+        title: undefined,
+        content: undefined,
+        category: undefined,
+        registerTime: undefined,
+        updateTime: undefined,
         user: {
-          id: Number,
-          email: String,
-          nickname: String,
+          id: undefined,
+          email: undefined,
+          nickname: undefined,
         },
         comments: [
           {
-            id: Number,
-            comment: String,
-            registerTime: String,
-            updateTime: String,
+            id: undefined,
+            comment: undefined,
+            registerTime: undefined,
+            updateTime: undefined,
             user: {
-              id: Number,
-              email: String,
-              nickname: String,
+              id: undefined,
+              email: undefined,
+              nickname: undefined,
             },
           },
         ],
@@ -39,7 +40,7 @@ const Post = ({ menu }) => {
     ],
   });
 
-  const getPosts = async (selectedPage) => {
+  const getPosts = async (menu, selectedPage) => {
     let res = {};
 
     switch (menu) {
@@ -65,14 +66,14 @@ const Post = ({ menu }) => {
     }
   };
 
-  const [selectedPage, setSelectedPage] = useState('1');
+  const [selectedPage, setSelectedPage] = useState(1);
 
   const onPageClick = (page) => {
     setSelectedPage(page);
   };
 
   useEffect(() => {
-    getPosts(selectedPage);
+    getPosts(menu, selectedPage);
   }, [menu, selectedPage]);
 
   return (
@@ -104,7 +105,16 @@ const Post = ({ menu }) => {
         ))}
       </Table>
 
-      <div className="justify-center my-8 select-none flex">
+      {posts && (
+        <Pagination
+          thisPage={posts.number}
+          totalPages={posts.totalPages}
+          setPage={onPageClick}
+          wait={3000}
+        />
+      )}
+
+      {/* <div className="justify-center my-8 select-none flex">
         {[...Array(posts.totalPages)].map((n, index) => (
           <button
             className={
@@ -119,7 +129,7 @@ const Post = ({ menu }) => {
             {index + 1}
           </button>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
