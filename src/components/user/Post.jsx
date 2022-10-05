@@ -9,36 +9,7 @@ import Pagination from '../Pagination';
 const Post = ({ menu }) => {
   const navigate = useNavigate();
 
-  const [posts, setPosts] = useState({
-    content: [
-      {
-        id: undefined,
-        title: undefined,
-        content: undefined,
-        category: undefined,
-        registerTime: undefined,
-        updateTime: undefined,
-        user: {
-          id: undefined,
-          email: undefined,
-          nickname: undefined,
-        },
-        comments: [
-          {
-            id: undefined,
-            comment: undefined,
-            registerTime: undefined,
-            updateTime: undefined,
-            user: {
-              id: undefined,
-              email: undefined,
-              nickname: undefined,
-            },
-          },
-        ],
-      },
-    ],
-  });
+  const [posts, setPosts] = useState();
 
   const getPosts = async (menu, selectedPage) => {
     let res = {};
@@ -75,6 +46,10 @@ const Post = ({ menu }) => {
   useEffect(() => {
     getPosts(menu, selectedPage);
   }, [menu, selectedPage]);
+
+  if (!posts) {
+    return <></>;
+  }
 
   return (
     <div>
@@ -113,23 +88,6 @@ const Post = ({ menu }) => {
           wait={3000}
         />
       )}
-
-      {/* <div className="justify-center my-8 select-none flex">
-        {[...Array(posts.totalPages)].map((n, index) => (
-          <button
-            className={
-              `py-2 px-4 shadow-md no-underline rounded-full bg-red text-sm border-red btn-primary 
-              focus:outline-none${selectedPage} === ${index + 1}`
-                ? `font-bold`
-                : ''
-            }
-            onClick={() => onPageClick(index + 1)}
-            key={index}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div> */}
     </div>
   );
 };
