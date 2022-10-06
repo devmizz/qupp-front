@@ -3,7 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import { useNavigate } from 'react-router-dom';
 
-import { getMyQuestions, getMyAnswers, getMyComments } from '../../util/axios';
+import {
+  getMyQuestions,
+  getMyAnswers,
+  getMyComments,
+} from '../../util/axios/userApi';
 import Pagination from '../Pagination';
 
 const Post = ({ menu }) => {

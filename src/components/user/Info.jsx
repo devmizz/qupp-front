@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { updateUserEmail, updateUserNickname } from '../../util/axios';
+import { updateUserEmail, updateUserNickname } from '../../util/axios/userApi';
 
 const Info = () => {
   const [updateEmail, setUpdateEmail] = useState('');

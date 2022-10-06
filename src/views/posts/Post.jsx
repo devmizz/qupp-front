@@ -1,7 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import { getPost, postAnswerReply, postQuestionReply } from '../../util/axios';
+import {
+  postAnswerReply,
+  postQuestionReply,
+} from '../../util/axios/post/replyApi';
+import { getPost } from '../../util/axios/post/postApi';
 
 import PostItem from '../../components/PostItem';
 

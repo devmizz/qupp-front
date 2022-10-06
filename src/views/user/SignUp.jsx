@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 
-import { signUp } from '../../util/axios';
+import { signUp } from '../../util/axios/userApi';
 import { setCookie } from '../../util/cookie';
 
 function SignUp() {

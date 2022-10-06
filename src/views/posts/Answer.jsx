@@ -1,7 +1,8 @@
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
-import { getPost, postAnswer, putAnswer } from '../../util/axios';
+import { postAnswer, putAnswer } from '../../util/axios/post/answerApi';
+import { getPost } from '../../util/axios/post/postApi';
 import { useEffect } from 'react';
 
 function Answer() {

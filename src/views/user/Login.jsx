@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { login } from '../../util/axios';
+import { login } from '../../util/axios/userApi';
 import { setCookie } from '../../util/cookie';
 
 import Button from 'react-bootstrap/Button';

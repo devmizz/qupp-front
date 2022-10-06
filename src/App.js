@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Head from './views/layout/Head';
 import Post from './views/posts/Post';
 import Posts from './views/posts/Posts';
+import Write from './views/posts/Write';
 import Question from './views/posts/Question';
 import Answer from './views/posts/Answer';
 import UpdatePost from './views/posts/UpdatePost';
@@ -22,7 +23,7 @@ function App() {
           <Route path="/" element={<Posts />}></Route>
           <Route path="/posts" element={<Posts />}></Route>
           <Route path="/post/:id" element={<Post />}></Route>
-          <Route path="/question" element={<Question />}></Route>
+          <Route path="/question" element={<Write />}></Route>
           <Route path="/question/:id" element={<Question />}></Route>
           <Route path="/post/:id/answer" element={<Answer />}></Route>
           <Route path="/post/:qid/answer/:aid" element={<Answer />}></Route>

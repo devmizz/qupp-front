@@ -2,7 +2,10 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { getPost, postQuestion, putQuestion } from '../../util/axios';
+import { postQuestion, putQuestion } from '../../util/axios/post/questionApi';
+import { getPost } from '../../util/axios/post/postApi';
+
+import Editor from '../../components/post/Editor';
 
 function Question() {
   const navigate = useNavigate();

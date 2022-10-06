@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import { updateReply, deleteReply } from '../util/axios';
+import { updateReply, deleteReply } from '../util/axios/post/replyApi';
 
 function Comments({ comments }) {
   const location = useLocation();
