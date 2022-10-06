@@ -11,7 +11,6 @@ const Pagination = ({ thisPage, totalPages, setPage }) => {
   const [bundleMin, setBundleMin] = useState(1);
   const [isPrev, setIsPrev] = useState(false);
   const [isNext, setIsNext] = useState(false);
-  const bundleStart = parseInt((now + 1) / PAGE_LIMIT) * PAGE_LIMIT + 1;
 
   const onPageClick = (num) => {
     setNow(num);
@@ -53,19 +52,20 @@ const Pagination = ({ thisPage, totalPages, setPage }) => {
 
   return (
     <div id="pagination" className="flex justify-center my-8">
-      {console.log(bundleMax)}
-      {console.log(bundleMin)}
-      {console.log(bundleMax - bundleMin + 1)}
       <div>{isPrev && <button onClick={() => onPrevClick}>Prev</button>}</div>
       <div>
         {[...Array(bundleMax - bundleMin + 1)].map((n, index) => (
           <button
-            className={`bg-blue-500 hover:bg-blue-700 text-black py-2 px-4 rounded-full 
-          ${now === index + bundleStart ? `text-bold bg-blue-700` : ''}`}
-            onClick={() => onPageClick(index + bundleStart)}
+            className={`py-2 px-4 shadow-md no-underline rounded-full bg-red text-black font-sans text-sm border-red btn-primary hover:text-white hover:bg-red-light focus:outline-none active:shadow-none
+                      ${
+                        now === index + bundleMin
+                          ? `text-bold bg-slate-400 shadow-none`
+                          : ''
+                      }`}
+            onClick={() => onPageClick(index + bundleMin)}
             key={index}
           >
-            {index + bundleStart}
+            {index + bundleMin}
           </button>
         ))}
       </div>

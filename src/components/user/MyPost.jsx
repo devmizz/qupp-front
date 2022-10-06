@@ -85,7 +85,6 @@ const Post = ({ menu }) => {
           thisPage={posts.number}
           totalPages={posts.totalPages}
           setPage={onPageClick}
-          wait={3000}
         />
       )}
     </div>
