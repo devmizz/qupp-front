@@ -175,7 +175,7 @@ export const getMyAnswers = async (id, page) => {
   return null;
 };
 
-export const getMyReplys = async (id, page) => {
+export const getMyComments = async (id, page) => {
   try {
     return await axiosInstance.get(`/user/${id}/comments?page=${page - 1}`);
   } catch (error) {

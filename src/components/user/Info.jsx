@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { updateUserEmail, updateUserNickname } from '../../util/axios';
 
-function MyInfo() {
+const Info = () => {
   const [updateEmail, setUpdateEmail] = useState('');
   const [updateNickname, setUpdateNickname] = useState('');
 
@@ -14,7 +14,7 @@ function MyInfo() {
     setUpdateNickname(e.target.value);
   };
 
-  const handleNicknameSubmit = async (e) => {
+  const nicknameSubmit = async (e) => {
     e.preventDefault();
 
     const body = {
@@ -27,7 +27,7 @@ function MyInfo() {
     setUpdateNickname('');
   };
 
-  const handleEmailSubmit = async (e) => {
+  const emailSubmit = async (e) => {
     e.preventDefault();
 
     const body = {
@@ -49,7 +49,7 @@ function MyInfo() {
             <div>{JSON.parse(localStorage.getItem('userEmail'))}</div>
             <div>
               <div className="flex mt-3">
-                <form className="flex" onSubmit={handleEmailSubmit}>
+                <form className="flex" onSubmit={emailSubmit}>
                   <input
                     type="email"
                     placeholder="변경할 이메일"
@@ -78,7 +78,7 @@ function MyInfo() {
             <div>{JSON.parse(localStorage.getItem('userNickname'))}</div>
 
             <div className="flex mt-3">
-              <form className="flex" onSubmit={handleNicknameSubmit}>
+              <form className="flex" onSubmit={nicknameSubmit}>
                 <input
                   type="nickname"
                   placeholder="변경할 닉네임"
@@ -100,6 +100,6 @@ function MyInfo() {
       </div>
     </div>
   );
-}
+};
 
-export default MyInfo;
+export default Info;

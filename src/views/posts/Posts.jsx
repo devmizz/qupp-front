@@ -125,6 +125,7 @@ function Posts() {
       </Table>
 
       <div className="justify-center my-8 select-none flex">
+        {console.log(posts)}
         {[...Array(posts.totalPages)].map((n, index) => (
           <button
             className="py-2 px-4 shadow-md no-underline rounded-full bg-red text-black font-sans font-semibold text-sm border-red btn-primary hover:text-white hover:bg-red-light focus:outline-none active:shadow-none"
