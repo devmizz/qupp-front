@@ -4,6 +4,8 @@ import Table from 'react-bootstrap/Table';
 
 import { getPosts } from '../../util/axios';
 
+import Pagination from '../../components/Pagination';
+
 const categories = [
   {
     id: 'All',
@@ -36,16 +38,7 @@ const categories = [
 ];
 
 function Posts() {
-  const [posts, setPosts] = useState({
-    content: [
-      {
-        question: {
-          user: {},
-        },
-      },
-    ],
-    totalPages: 0,
-  });
+  const [posts, setPosts] = useState();
 
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -60,16 +53,20 @@ function Posts() {
   };
 
   const getPostsData = async (selectedCategory, selectedPage) => {
-    const postsData = await getPosts(selectedCategory, selectedPage);
+    const res = await getPosts(selectedCategory, selectedPage);
 
-    if (postsData) {
-      setPosts(postsData);
+    if (res) {
+      setPosts(res);
     }
   };
 
   useEffect(() => {
     getPostsData(selectedCategory, selectedPage);
   }, [selectedCategory, selectedPage]);
+
+  if (!posts) {
+    return <></>;
+  }
 
   return (
     <div className="container">
@@ -112,7 +109,7 @@ function Posts() {
               <td>
                 <a
                   className="no-underline text-black"
-                  href={`/post/${post.question?.id}`}
+                  href={`/post/${post.question.id}`}
                 >
                   {post.question.title}
                 </a>
@@ -124,18 +121,13 @@ function Posts() {
         ))}
       </Table>
 
-      <div className="justify-center my-8 select-none flex">
-        {console.log(posts)}
-        {[...Array(posts.totalPages)].map((n, index) => (
-          <button
-            className="py-2 px-4 shadow-md no-underline rounded-full bg-red text-black font-sans font-semibold text-sm border-red btn-primary hover:text-white hover:bg-red-light focus:outline-none active:shadow-none"
-            onClick={() => onPageClick(index + 1)}
-            key={index}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+      {posts && (
+        <Pagination
+          thisPage={posts.number}
+          totalPages={posts.totalPages}
+          setPage={onPageClick}
+        />
+      )}
     </div>
   );
 }
