@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Head from './views/layout/Head';
@@ -12,10 +13,12 @@ import Login from './views/user/Login';
 import Logout from './views/user/Logout';
 import SignUp from './views/user/SignUp';
 import MyPage from './views/user/MyPage';
+import GlobalStyle from './components/style/GlobalStyle';
 
 function App() {
   return (
     <div className="App">
+      {/* <GlobalStyle /> */}
       <BrowserRouter>
         <Head />
         <Routes>
