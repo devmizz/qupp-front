@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import Table from 'react-bootstrap/Table';
 
-import { getPosts } from '../../util/axios';
+import { getPosts } from '../../util/axios/post/postApi';
 
 import Pagination from '../../components/Pagination';
 

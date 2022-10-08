@@ -26,7 +26,6 @@ function App() {
           <Route path="/posts" element={<Posts />}></Route>
           <Route path="/post/:id" element={<Post />}></Route>
           <Route path="/question" element={<Question />}></Route>
-          <Route path="/question/:id" element={<Question />}></Route>
           <Route path="/post/:id/answer" element={<Answer />}></Route>
           <Route path="/post/:qid/answer/:aid" element={<Answer />}></Route>
           <Route path="/update_post" element={<UpdatePost />}></Route>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { postQuestion } from '../../util/axios';
+import { postQuestion } from '../../util/axios/post/questionApi';
 
 function UpdatePost() {
   const navigate = useNavigate();

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 import Comments from './Comments';
-import { deletePost } from '../util/axios';
+import { deleteQuestion } from '../util/axios/post/questionApi';
+import { deleteAnswer } from '../util/axios/post/answerApi';
 
 function PostItem({ item, onSubmit }) {
   const {
@@ -34,12 +35,14 @@ function PostItem({ item, onSubmit }) {
   const onPostDeleteClick = async (id) => {
     var qa = 'answer';
     var url = location.pathname;
+    let res;
     if (title) {
       qa = 'question';
       url = '/';
+      res = await deleteQuestion(id);
+    } else {
+      res = await deleteAnswer(id);
     }
-
-    const res = await deletePost(id, qa);
 
     if (res.status === 204) {
       window.location.replace(url);
