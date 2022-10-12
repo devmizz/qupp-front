@@ -6,6 +6,8 @@ import { getPosts } from '../../util/axios/post/postApi';
 
 import Pagination from '../../components/Pagination';
 
+import { useSelector } from 'react-redux';
+
 const categories = [
   {
     id: 'All',
@@ -39,8 +41,10 @@ const categories = [
 
 function Posts() {
   const [posts, setPosts] = useState();
-
   const [selectedCategory, setSelectedCategory] = useState('All');
+
+  const temp = useSelector((state) => state.user);
+  console.log(temp);
 
   const onCategoryClick = (id) => {
     setSelectedCategory(id);

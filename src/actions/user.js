@@ -1,4 +1,4 @@
-import { SET, UNSET } from './types';
+import { SET, UNSET } from '../constants/types';
 
 export const setUser = (data) => {
   return {
