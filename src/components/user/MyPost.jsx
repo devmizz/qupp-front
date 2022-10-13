@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Table from 'react-bootstrap/Table';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import {
   getMyQuestions,
@@ -13,6 +14,8 @@ import Pagination from '../Pagination';
 const Post = ({ menu }) => {
   const navigate = useNavigate();
 
+  const user = useSelector((state) => state.user);
+
   const [posts, setPosts] = useState();
 
   const getPosts = async (menu, selectedPage) => {
@@ -20,16 +23,13 @@ const Post = ({ menu }) => {
 
     switch (menu) {
       case 'question':
-        res = await getMyQuestions(
-          localStorage.getItem('userId'),
-          selectedPage
-        );
+        res = await getMyQuestions(user.id, selectedPage);
         break;
       case 'answer':
-        res = await getMyAnswers(localStorage.getItem('userId'), selectedPage);
+        res = await getMyAnswers(user.id, selectedPage);
         break;
       case 'comment':
-        res = await getMyComments(localStorage.getItem('userId'), selectedPage);
+        res = await getMyComments(user.id, selectedPage);
         break;
       default:
         console.log('error');
