@@ -1,4 +1,4 @@
-import { SET, UNSET } from '../constants/types';
+import { SET, RESET } from '../constants/types';
 
 export const setUser = (data) => {
   return {
@@ -7,8 +7,8 @@ export const setUser = (data) => {
   };
 };
 
-export const unset = () => {
+export const reset = () => {
   return {
-    type: UNSET,
+    type: RESET,
   };
 };

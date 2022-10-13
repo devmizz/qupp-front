@@ -1,15 +1,23 @@
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { removeCookie } from '../../util/cookie';
+import { RESET } from '../../constants/types';
+import { useEffect } from 'react';
 
 function Logout() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   removeCookie('token');
 
-  localStorage.removeItem('userId');
-  localStorage.removeItem('userEmail');
-  localStorage.removeItem('userNickname');
+  localStorage.removeItem('user');
 
-  return <Navigate to="/" replace />;
+  dispatch({
+    type: RESET,
+  });
+
+  return navigate(`/login`);
 }
 
 export default Logout;

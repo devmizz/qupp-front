@@ -1,12 +1,12 @@
-import { SET, UNSET } from '../constants/types';
+import { SET, RESET } from '../constants/types';
 
-const userState = {
+const initialState = {
   id: -1,
   email: '',
   nickname: '',
 };
 
-export default function user(state = userState, action) {
+export default function user(state = initialState, action) {
   switch (action.type) {
     case SET: {
       return {
@@ -16,7 +16,7 @@ export default function user(state = userState, action) {
         nickname: action.payload.nickname,
       };
     }
-    case UNSET: {
+    case RESET: {
       return {
         ...state,
         id: -1,

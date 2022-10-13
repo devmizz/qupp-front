@@ -45,24 +45,20 @@ function Login() {
 
       const data = {
         id: user.id,
-        email: JSON.stringify(user.email),
-        nickname: JSON.stringify(user.nickname),
+        email: user.email,
+        nickname: user.nickname,
       };
+
+      localStorage.setItem('user', data);
 
       dispatch({
         type: SET,
         payload: data,
       });
 
-      localStorage.setItem('userId', user.id);
-      localStorage.setItem('userEmail', JSON.stringify(user.email));
-      localStorage.setItem('userNickname', JSON.stringify(user.nickname));
-
       setCookie('token', loginData.data.jwtToken);
-      navigate('/');
-      // 이건 야매임! 새로고침을 해서 강제로 cookie를 읽게 만들어서 자연스러운 flow 형성
-      // 전역 상태 관리 달아서 useAuth에 있는 token 값을 update 해주면 자연스럽게 해당 부분 없어도 동작할것임
-      window.location.reload();
+
+      navigate(`/`);
     }
   }
 

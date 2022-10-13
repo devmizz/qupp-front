@@ -1,2 +1,2 @@
 export const SET = 'SET';
-export const UNSET = 'UNSET';
+export const RESET = 'RESET';
