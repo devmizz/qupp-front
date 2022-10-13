@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -10,8 +11,11 @@ function SignUp() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
+  const [isDuplicatedEmail, setIsDuplicatedEmail] = useState();
+  const [isValidEmail, setIsValidEmail] = useState();
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
+  const [isDuplicatedNickname, setIsDuplicatedNickname] = useState();
 
   const emailHandler = (e) => {
     e.preventDefault();
@@ -37,10 +41,10 @@ function SignUp() {
       nickname: nickname,
     };
 
-    apiCall(body);
+    axios(body);
   };
 
-  async function apiCall(body) {
+  async function axios(body) {
     const signUpData = await signUp(body);
 
     if (signUpData) {
@@ -62,6 +66,15 @@ function SignUp() {
 
   return (
     <div className="flex justify-center mt-3 container">
+      <form
+        className="flex flex-col w-4/12 justify-center align-middle"
+        onSubmit={submitHandler}
+      >
+        <div>
+          이메일
+          <input className="border-solid border-2"></input>
+        </div>
+      </form>
       <Form
         className="flex flex-col w-4/12 justify-center align-middle"
         onSubmit={submitHandler}
