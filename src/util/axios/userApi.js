@@ -10,29 +10,23 @@ export const axiosInstance = axios.create({
 });
 
 export const signUp = async (json) => {
-  var data = {};
   try {
-    data = await axiosInstance.post(`/user`, json);
+    return await axiosInstance.post(`/user`, json);
   } catch (error) {
     console.error(error);
     if (error.response.status === 400) {
       alert(error.response.data.msg);
     }
   }
-
-  return data;
 };
 
 export const login = async (json) => {
-  var data = {};
   try {
-    data = await axiosInstance.post(`/login`, json);
+    return await axiosInstance.post(`/login`, json);
   } catch (error) {
     console.error(error);
     alert(error.response.data.msg);
   }
-
-  return data;
 };
 
 export const updateUserNickname = async (id, json) => {
