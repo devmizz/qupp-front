@@ -9,29 +9,28 @@ export const axiosInstance = axios.create({
 });
 
 export const postQuestion = async (content) => {
-  var data = {};
   try {
-    data = await axiosInstance.post(`/question`, content);
+    return await axiosInstance.post(`/question`, content);
   } catch (error) {
     console.error(error);
+    alert(error.response.data.msg);
   }
-  return data;
 };
 
 export const putQuestion = async (id, content) => {
-  var data = {};
   try {
-    data = await axiosInstance.put(`/question/${id}`, content);
+    return await axiosInstance.put(`/question/${id}`, content);
   } catch (error) {
     console.error(error);
+    alert(error.response.data.msg);
   }
-  return data;
 };
 
 export const deleteQuestion = async (id) => {
   try {
     return await axiosInstance.delete(`/question/${id}`);
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
 };

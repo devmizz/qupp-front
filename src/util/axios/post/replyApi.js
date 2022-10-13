@@ -12,10 +12,9 @@ export const postQuestionReply = async (questionId, json) => {
   try {
     return await axiosInstance.post(`/question/${questionId}/comment`, json);
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
-
-  return {};
 };
 
 export const postAnswerReply = async (questionId, answerId, json) => {
@@ -25,6 +24,7 @@ export const postAnswerReply = async (questionId, answerId, json) => {
       json
     );
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
 };
@@ -33,6 +33,7 @@ export const updateReply = async (id, json) => {
   try {
     return await axiosInstance.put(`/comment/${id}`, json);
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
 };
@@ -41,6 +42,7 @@ export const deleteReply = async (id) => {
   try {
     return await axiosInstance.delete(`/comment/${id}`);
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
 };

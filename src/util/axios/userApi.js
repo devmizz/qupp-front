@@ -14,9 +14,7 @@ export const signUp = async (json) => {
     return await axiosInstance.post(`/user`, json);
   } catch (error) {
     console.error(error);
-    if (error.response.status === 400) {
-      alert(error.response.data.msg);
-    }
+    alert(error.response.data.msg);
   }
 };
 
@@ -33,6 +31,7 @@ export const updateUserNickname = async (id, json) => {
   try {
     return await axiosInstance.put(`/user/${id}/updateNickname`, json);
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
 };
@@ -41,6 +40,7 @@ export const updateUserEmail = async (id, json) => {
   try {
     return await axiosInstance.put(`/user/${id}/updateEmail`, json);
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
 };
@@ -49,28 +49,25 @@ export const getMyQuestions = async (id, page) => {
   try {
     return await axiosInstance.get(`/user/${id}/questions?page=${page - 1}`);
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
-
-  return null;
 };
 
 export const getMyAnswers = async (id, page) => {
   try {
     return await axiosInstance.get(`/user/${id}/answers?page=${page - 1}`);
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
-
-  return null;
 };
 
 export const getMyComments = async (id, page) => {
   try {
     return await axiosInstance.get(`/user/${id}/comments?page=${page - 1}`);
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
-
-  return null;
 };

@@ -9,13 +9,12 @@ export const axiosInstance = axios.create({
 });
 
 export const postAnswer = async (id, content) => {
-  var data = {};
   try {
-    data = await axiosInstance.post(`/question/${id}/answer`, content);
+    return await axiosInstance.post(`/question/${id}/answer`, content);
   } catch (error) {
     console.error(error);
+    alert(error.response.data.msg);
   }
-  return data;
 };
 
 export const putAnswer = async (id, content) => {
@@ -23,6 +22,7 @@ export const putAnswer = async (id, content) => {
     return await axiosInstance.put(`/answer/${id}`, content);
   } catch (error) {
     console.error(error);
+    alert(error.response.data.msg);
   }
 };
 
@@ -30,6 +30,7 @@ export const deleteAnswer = async (id) => {
   try {
     return await axiosInstance.delete(`/answer/${id}`);
   } catch (error) {
+    console.error(error);
     alert(error.response.data.msg);
   }
 };

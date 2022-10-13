@@ -10,26 +10,20 @@ export const axiosInstance = axios.create({
 
 export const getPost = async (id) => {
   try {
-    const { data } = await axiosInstance.get(`/question/${id}`);
-
-    return data;
+    return await axiosInstance.get(`/question/${id}`);
   } catch (error) {
     console.error(error);
+    alert(error.response.data.msg);
   }
-
-  return null;
 };
 
 export const getPosts = async (selectedCategory, selectedPage) => {
   try {
-    const { data } = await axiosInstance.get(
+    return await axiosInstance.get(
       `/questions?page=${selectedPage - 1}&category=${selectedCategory}`
     );
-
-    return data;
   } catch (error) {
     console.error(error);
+    alert(error.response.data.msg);
   }
-
-  return null;
 };
