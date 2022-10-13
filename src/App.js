@@ -21,7 +21,7 @@ function App() {
       {/* <GlobalStyle /> */}
       <BrowserRouter>
         <Header />
-        <Routes>
+        <Routes className="flex-1">
           <Route path="/" element={<Posts />}></Route>
           <Route path="/posts" element={<Posts />}></Route>
           <Route path="/post/:id" element={<Post />}></Route>

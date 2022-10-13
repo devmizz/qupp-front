@@ -17,6 +17,10 @@ export default function Header() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
+  const onTitleClick = () => {
+    navigate(`/`);
+  };
+
   const onLoginClick = () => {
     navigate(`/login`);
   };
@@ -45,9 +49,14 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            QUPP
-          </Typography>
+          <div className="flex-1">
+            <Button color="inherit" onClick={() => onTitleClick()}>
+              <Typography variant="h5" component="div">
+                QUPP
+              </Typography>
+            </Button>
+          </div>
+
           {user.id === -1 ? (
             <>
               <Button color="inherit" onClick={() => onLoginClick()}>

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Table from 'react-bootstrap/Table';
 
 import { getPosts } from '../../util/axios/post/postApi';
 
 import Pagination from '../../components/Pagination';
-
-import { useSelector } from 'react-redux';
 
 const categories = [
   {
@@ -42,15 +42,19 @@ const categories = [
 function Posts() {
   const [posts, setPosts] = useState();
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedPage, setSelectedPage] = useState('1');
 
-  const temp = useSelector((state) => state.user);
-  console.log(temp);
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user);
 
   const onCategoryClick = (id) => {
     setSelectedCategory(id);
   };
 
-  const [selectedPage, setSelectedPage] = useState('1');
+  const onTitleClick = (id) => {
+    navigate(`/post/${id}`);
+  };
 
   const onPageClick = (page) => {
     setSelectedPage(page);
@@ -63,6 +67,10 @@ function Posts() {
       setPosts(res);
     }
   };
+
+  useEffect(() => {
+    getPostsData(selectedCategory, selectedPage);
+  }, [user]);
 
   useEffect(() => {
     getPostsData(selectedCategory, selectedPage);
@@ -111,12 +119,15 @@ function Posts() {
           <tbody key={index}>
             <tr>
               <td>
-                <a
+                <button onClick={() => onTitleClick(post.question.id)}>
+                  {post.question.title}
+                </button>
+                {/* <a
                   className="no-underline text-black"
                   href={`/post/${post.question.id}`}
                 >
                   {post.question.title}
-                </a>
+                </a> */}
               </td>
               <td>{post.question.user.nickname}</td>
               <td>{post.question.registerTime}</td>
