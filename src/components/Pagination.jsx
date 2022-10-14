@@ -43,12 +43,17 @@ const Pagination = ({ thisPage, totalPages, setPage }) => {
   };
 
   useEffect(() => {
-    setNow(thisPage);
+    setNow(0);
     setTotal(totalPages);
+    setIsPrev(false);
     if (totalPages > PAGE_LIMIT) {
       setIsNext(true);
     }
+    setBundleMax(total > PAGE_LIMIT ? PAGE_LIMIT : total);
   }, []);
+
+  console.log('total' + total);
+  console.log(bundleMax);
 
   return (
     <div id="pagination" className="flex justify-center my-8">

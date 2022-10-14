@@ -8,33 +8,6 @@ export const axiosInstance = axios.create({
   },
 });
 
-export const login = async (json) => {
-  try {
-    return await axiosInstance.post(`/login`, json);
-  } catch (error) {
-    console.error(error);
-    alert(error.response.data.msg);
-  }
-};
-
-export const updateUserNickname = async (id, json) => {
-  try {
-    return await axiosInstance.put(`/user/${id}/updateNickname`, json);
-  } catch (error) {
-    console.error(error);
-    alert(error.response.data.msg);
-  }
-};
-
-export const updateUserEmail = async (id, json) => {
-  try {
-    return await axiosInstance.put(`/user/${id}/updateEmail`, json);
-  } catch (error) {
-    console.error(error);
-    alert(error.response.data.msg);
-  }
-};
-
 export const getMyQuestions = async (id, page) => {
   try {
     return await axiosInstance.get(`/user/${id}/questions?page=${page - 1}`);

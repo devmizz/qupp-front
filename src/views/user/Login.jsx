@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { login } from '../../util/axios/user/userApi';
+import { login } from '../../util/axios/user/loginApi';
 import { setCookie } from '../../util/cookie';
 import { SET } from '../../constants/types';
 

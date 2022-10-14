@@ -8,7 +8,7 @@ import {
   getMyQuestions,
   getMyAnswers,
   getMyComments,
-} from '../../util/axios/user/userApi';
+} from '../../util/axios/user/myPostApi';
 import Pagination from '../Pagination';
 
 const Post = ({ menu }) => {
