@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { login } from '../../util/axios/userApi';
+import { login } from '../../util/axios/user/userApi';
 import { setCookie } from '../../util/cookie';
 import { SET } from '../../constants/types';
 
@@ -30,8 +30,8 @@ function Login() {
     e.preventDefault();
 
     let body = {
-      email: email,
-      password: password,
+      email,
+      password,
     };
 
     apiCall(body);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie } from '../cookie';
+import { getCookie } from '../../cookie';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://115.85.180.6:8080',
@@ -8,15 +8,6 @@ export const axiosInstance = axios.create({
     // withCredentials: true,
   },
 });
-
-export const signUp = async (json) => {
-  try {
-    return await axiosInstance.post(`/user`, json);
-  } catch (error) {
-    console.error(error);
-    alert(error.response.data.msg);
-  }
-};
 
 export const login = async (json) => {
   try {
