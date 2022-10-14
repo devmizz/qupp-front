@@ -80,6 +80,9 @@ function Posts() {
     return <></>;
   }
 
+  console.log(posts);
+  console.log('hi');
+
   return (
     <div className="container">
       <div className="bg-white">
@@ -115,7 +118,7 @@ function Posts() {
           </tr>
         </thead>
 
-        {posts.content.map((post, index) => (
+        {posts.data.content.map((post, index) => (
           <tbody key={index}>
             <tr>
               <td>
@@ -138,8 +141,8 @@ function Posts() {
 
       {posts && (
         <Pagination
-          thisPage={posts.number}
-          totalPages={posts.totalPages}
+          thisPage={posts.data.number}
+          totalPages={posts.data.totalPages}
           setPage={onPageClick}
         />
       )}
