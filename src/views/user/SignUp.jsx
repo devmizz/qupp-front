@@ -1,120 +1,200 @@
-import axios from 'axios';
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { signUp } from '../../util/axios/userApi';
-import { setCookie } from '../../util/cookie';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import TextField from '@mui/material/TextField';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-function SignUp() {
+import { SET } from '../../constants/types';
+import {
+  signUp,
+  isDuplicateEmail,
+  isDuplicateNickname,
+} from '../../util/axios/user/signUpApi';
+import { setCookie } from '../../util/cookie';
+import { useEffect } from 'react';
+
+export default function SignUp() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [isDuplicatedEmail, setIsDuplicatedEmail] = useState();
-  const [isValidEmail, setIsValidEmail] = useState();
-  const [password, setPassword] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [isDuplicatedNickname, setIsDuplicatedNickname] = useState();
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+    validPassword: '',
+    showPassword: false,
+  });
 
-  const emailHandler = (e) => {
+  const [isEmailDuplicate, setIsEmailDuplicate] = useState(false);
+
+  const [isNicknameDuplicate, setIsNicknameDuplicate] = useState(false);
+
+  const handleChange = (prop) => (e) => {
     e.preventDefault();
-    setEmail(e.target.value);
+    setValues({ ...values, [prop]: e.target.value });
   };
 
-  const passwordHandler = (e) => {
-    e.preventDefault();
-    setPassword(e.target.value);
-  };
-
-  const nicknameHandler = (e) => {
-    e.preventDefault();
-    setNickname(e.target.value);
+  const handleShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     let body = {
-      email: email,
-      password: password,
-      nickname: nickname,
+      email: values.email,
+      password: values.password,
+      nickname: values.nickname,
     };
 
     axios(body);
   };
 
+  useEffect(() => {
+    isDuplicateEmail(values.email).then((res) =>
+      res ? setIsEmailDuplicate(true) : setIsEmailDuplicate(false)
+    );
+  }, [values.email]);
+
+  useEffect(() => {
+    isDuplicateNickname(values.nickname).then((res) =>
+      res ? setIsNicknameDuplicate(true) : setIsNicknameDuplicate(false)
+    );
+  }, [values.nickname]);
+
+  // 얘는 다른데로 가야 하지 않나?
   async function axios(body) {
     const signUpData = await signUp(body);
 
     if (signUpData) {
-      const token = signUpData.data.jwtToken;
+      const user = signUpData.data.responseUser;
 
-      let user = signUpData.data.responseUser;
+      const data = {
+        id: user.id,
+        email: user.email,
+        nickname: user.nickname,
+      };
 
-      localStorage.setItem('userId', user.id);
-      localStorage.setItem('userEmail', JSON.stringify(user.email));
-      localStorage.setItem('userNickname', JSON.stringify(user.nickname));
+      localStorage.setItem('user', data);
 
-      setCookie('token', token);
-      navigate('/');
-      // 이건 야매임! 새로고침을 해서 강제로 cookie를 읽게 만들어서 자연스러운 flow 형성
-      // 전역 상태 관리 달아서 useAuth에 있는 token 값을 update 해주면 자연스럽게 해당 부분 없어도 동작할것임
-      window.location.reload();
+      setCookie('token', signUpData.data.jwtToken);
+
+      dispatch({
+        type: SET,
+        payload: data,
+      });
+
+      navigate(`/`);
     }
   }
 
   return (
     <div className="flex justify-center mt-3 container">
-      <form
-        className="flex flex-col w-4/12 justify-center align-middle"
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': { m: 1, width: '35ch' },
+        }}
+        noValidate
+        autoComplete="off"
         onSubmit={submitHandler}
       >
+        {/* 이메일 */}
         <div>
-          이메일
-          <input className="border-solid border-2"></input>
+          <div className="m-1 font-bold text-sky-700 text-lg">이메일</div>
+          <TextField
+            error={isEmailDuplicate}
+            fullWidth
+            id="outlined-email"
+            value={values.email}
+            color="primary"
+            onChange={handleChange('email')}
+          />
+          {isEmailDuplicate && (
+            <FormHelperText>이미 존재하는 이메일입니다</FormHelperText>
+          )}
         </div>
-      </form>
-      <Form
-        className="flex flex-col w-4/12 justify-center align-middle"
-        onSubmit={submitHandler}
-      >
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>이메일</Form.Label>
-          <Form.Control
-            type="email"
-            value={email}
-            onChange={emailHandler}
-            placeholder="Enter email"
+        <div>
+          <div className="m-1 font-bold text-sky-700 text-lg">비밀번호</div>
+          <FormControl sx={{ width: '35ch' }} variant="outlined">
+            <OutlinedInput
+              error={values.password !== values.validPassword}
+              id="outlined-adornment-password"
+              type={values.showPassword ? 'text' : 'password'}
+              value={values.password}
+              onChange={handleChange('password')}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleShowPassword}
+                    edge="end"
+                  >
+                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </div>
+        <div>
+          <div className="m-1 font-bold text-sky-700 text-lg">
+            비밀번호 확인
+          </div>
+          <FormControl sx={{ width: '35ch' }} variant="outlined">
+            <OutlinedInput
+              error={values.password !== values.validPassword}
+              id="outlined-adornment-checkedPassword"
+              type={values.showPassword ? 'text' : 'password'}
+              value={values.validPassword}
+              onChange={handleChange('validPassword')}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleShowPassword}
+                    edge="end"
+                  >
+                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+            {values.password !== values.validPassword ? (
+              <FormHelperText>비밀번호가 다릅니다</FormHelperText>
+            ) : (
+              ' '
+            )}
+          </FormControl>
+        </div>
+        <div>
+          <div className="m-1 font-bold text-sky-700 text-lg">닉네임</div>
+          <TextField
+            error={isNicknameDuplicate}
+            fullWidth
+            id="outlined-nickname"
+            value={values.nickname}
+            onChange={handleChange('nickname')}
           />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>비밀번호</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={passwordHandler}
-            placeholder="Password"
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicNickname">
-          <Form.Label>닉네임</Form.Label>
-          <Form.Control
-            type="nickname"
-            value={nickname}
-            onChange={nicknameHandler}
-            placeholder="Enter nickname"
-          />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
+          {isNicknameDuplicate && (
+            <FormHelperText>이미 존재하는 닉네임입니다</FormHelperText>
+          )}
+        </div>
+        <Button type="submit" variant="contained">
           회원가입
         </Button>
-      </Form>
+      </Box>
     </div>
   );
 }
-
-export default SignUp;
