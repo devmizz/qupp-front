@@ -80,9 +80,6 @@ function Posts() {
     return <></>;
   }
 
-  console.log(posts);
-  console.log('hi');
-
   return (
     <div className="container">
       <div className="bg-white">
