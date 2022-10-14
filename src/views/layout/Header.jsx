@@ -46,38 +46,40 @@ export default function Header() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <div className="flex-1">
-            <Button color="inherit" onClick={() => onTitleClick()}>
-              <Typography variant="h5" component="div">
-                QUPP
-              </Typography>
-            </Button>
-          </div>
+    <header>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <div className="flex-1">
+              <Button color="inherit" onClick={() => onTitleClick()}>
+                <Typography variant="h5" component="div">
+                  QUPP
+                </Typography>
+              </Button>
+            </div>
 
-          {user.id === -1 ? (
-            <>
-              <Button color="inherit" onClick={() => onLoginClick()}>
-                로그인
-              </Button>
-              <Button color="inherit" onClick={() => onSignUpClick()}>
-                회원가입
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button color="inherit" onClick={() => onMyPageClick()}>
-                마이페이지
-              </Button>
-              <Button color="inherit" onClick={() => onLogoutClick()}>
-                로그아웃
-              </Button>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-    </Box>
+            {user.id === -1 ? (
+              <>
+                <Button color="inherit" onClick={() => onLoginClick()}>
+                  로그인
+                </Button>
+                <Button color="inherit" onClick={() => onSignUpClick()}>
+                  회원가입
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button color="inherit" onClick={() => onMyPageClick()}>
+                  마이페이지
+                </Button>
+                <Button color="inherit" onClick={() => onLogoutClick()}>
+                  로그아웃
+                </Button>
+              </>
+            )}
+          </Toolbar>
+        </AppBar>
+      </Box>
+    </header>
   );
 }

@@ -28,24 +28,28 @@ function App() {
     });
   }
   return (
-    <div className="App">
+    <div className="App h-full w-full">
       {/* <GlobalStyle /> */}
       <BrowserRouter>
-        <Header />
-        <Routes className="flex-1">
-          <Route path="/" element={<Posts />}></Route>
-          <Route path="/posts" element={<Posts />}></Route>
-          <Route path="/post/:id" element={<Post />}></Route>
-          <Route path="/question" element={<Question />}></Route>
-          <Route path="/post/:id/answer" element={<Answer />}></Route>
-          <Route path="/post/:qid/answer/:aid" element={<Answer />}></Route>
-          <Route path="/update_post" element={<UpdatePost />}></Route>
+        <div id="wrapper" className="flex flex-col h-screen">
+          <Header />
+          <div id="main-content" className="flex-1">
+            <Routes>
+              <Route path="/" element={<Posts />}></Route>
+              <Route path="/posts" element={<Posts />}></Route>
+              <Route path="/post/:id" element={<Post />}></Route>
+              <Route path="/question" element={<Question />}></Route>
+              <Route path="/post/:id/answer" element={<Answer />}></Route>
+              <Route path="/post/:qid/answer/:aid" element={<Answer />}></Route>
+              <Route path="/update_post" element={<UpdatePost />}></Route>
 
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/create_account" element={<SignUp />}></Route>
-          <Route path="/my_page" element={<MyPage />}></Route>
-        </Routes>
-        <Footer />
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/create_account" element={<SignUp />}></Route>
+              <Route path="/my_page" element={<MyPage />}></Route>
+            </Routes>
+          </div>
+          <Footer />
+        </div>
       </BrowserRouter>
     </div>
   );

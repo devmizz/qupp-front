@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="relative py-10 flex items-center justify-evenly bg-gray-700 md:py-10">
+    <footer className="flex items-center justify-evenly bg-gray-700 py-10">
       <div className="flex text-gray-300">
         <h1>QUPP</h1>
       </div>
