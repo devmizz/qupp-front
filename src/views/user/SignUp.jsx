@@ -78,8 +78,6 @@ export default function SignUp() {
     const signUpData = await signUp(body);
 
     if (signUpData) {
-      const token = signUpData.data.jwtToken;
-
       const user = signUpData.data.responseUser;
 
       const data = {
@@ -90,12 +88,12 @@ export default function SignUp() {
 
       localStorage.setItem('user', data);
 
+      setCookie('token', signUpData.data.jwtToken);
+
       dispatch({
         type: SET,
         payload: data,
       });
-
-      setCookie('token', token);
 
       navigate(`/`);
     }
@@ -193,7 +191,9 @@ export default function SignUp() {
             <FormHelperText>이미 존재하는 닉네임입니다</FormHelperText>
           )}
         </div>
-        <Button variant="contained">회원가입</Button>
+        <Button type="submit" variant="contained">
+          회원가입
+        </Button>
       </Box>
     </div>
   );
