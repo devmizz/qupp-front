@@ -8,7 +8,6 @@ export default function Footer() {
       </div>
       <div className="flex flex-col text-gray-300">
         <h4>Question University Problem Platform</h4>
-        <h6 className="text-center font-bold">개발자</h6>
         <div className="flex text-center justify-evenly">
           <div className="m-auto">
             <div className="flex">
