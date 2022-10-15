@@ -24,7 +24,7 @@ const Post = ({ menu }) => {
 
     switch (menu) {
       case 'question':
-        res = await getMyQuestions(user.id, selectedPage);
+        res = await getMyQuestions(user.id * 1, selectedPage);
         break;
       case 'answer':
         res = await getMyAnswers(user.id, selectedPage);

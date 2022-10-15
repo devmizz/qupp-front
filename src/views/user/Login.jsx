@@ -44,12 +44,12 @@ function Login() {
       const user = loginData.data.responseUser;
 
       const data = {
-        id: user.id * 1,
+        id: user.id,
         email: user.email,
         nickname: user.nickname,
       };
 
-      localStorage.setItem('user', data);
+      localStorage.setItem('user', JSON.stringify(data));
 
       dispatch({
         type: SET,

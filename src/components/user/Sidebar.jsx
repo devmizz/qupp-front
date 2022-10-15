@@ -25,7 +25,7 @@ const menus = [
 ];
 
 const Sidebar = ({ onClickMenu }) => {
-  const [selectedMenu, setMenu] = useState();
+  const [selectedMenu, setMenu] = useState('info');
 
   const onClick = (id) => {
     setMenu(id);
@@ -36,9 +36,9 @@ const Sidebar = ({ onClickMenu }) => {
     <div id="mypage-sidebar" className="h-full">
       <Paper elevation={0} sx={{ width: 320, maxWidth: '100%' }}>
         <MenuList>
-          {menus.map((menu) => (
+          {menus.map((menu, index) => (
             <MenuItem
-              autoFocus
+              key={index}
               selected={menu.id === selectedMenu}
               onClick={() => onClick(menu.id)}
             >

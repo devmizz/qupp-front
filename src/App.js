@@ -20,7 +20,7 @@ import GlobalStyle from './components/style/GlobalStyle';
 
 function App() {
   const dispatch = useDispatch();
-  const user = localStorage.getItem('user');
+  const user = JSON.parse(localStorage.getItem('user'));
   if (user) {
     dispatch({
       type: SET,
