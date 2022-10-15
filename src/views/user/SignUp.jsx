@@ -81,7 +81,7 @@ export default function SignUp() {
       const user = signUpData.data.responseUser;
 
       const data = {
-        id: user.id,
+        id: user.id * 1,
         email: user.email,
         nickname: user.nickname,
       };

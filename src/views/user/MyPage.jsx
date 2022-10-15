@@ -13,13 +13,12 @@ const MyPage = () => {
 
   return (
     <div className="flex">
-      <div id="sidebar" className="w-2/12">
+      <div id="sidebar" className="w-3/12">
         <Sidebar onClickMenu={onClickMenu} />
       </div>
-      <div id="content" className="w-8/12">
+      <div id="content" className="w-9/12">
         {menu === 'info' ? <Info /> : <MyPost menu={menu} />}
       </div>
-      <div className="w-2/12"></div>
     </div>
   );
 };

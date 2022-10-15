@@ -52,9 +52,6 @@ const Pagination = ({ thisPage, totalPages, setPage }) => {
     setBundleMax(total > PAGE_LIMIT ? PAGE_LIMIT : total);
   }, []);
 
-  console.log('total' + total);
-  console.log(bundleMax);
-
   return (
     <div id="pagination" className="flex justify-center my-8">
       <div>{isPrev && <button onClick={() => onPrevClick}>Prev</button>}</div>
