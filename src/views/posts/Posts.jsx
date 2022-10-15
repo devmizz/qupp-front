@@ -7,6 +7,7 @@ import Table from 'react-bootstrap/Table';
 import { getPosts } from '../../util/axios/post/postApi';
 
 import Pagination from '../../components/Pagination';
+import Loading from '../../components/Loading';
 
 const categories = [
   {
@@ -77,12 +78,12 @@ function Posts() {
   }, [selectedCategory, selectedPage]);
 
   if (!posts) {
-    return <></>;
+    return <Loading />;
   }
 
   return (
     <div className="container">
-      <div className="bg-white">
+      <div>
         <nav className="flex flex-col sm:flex-row w-full">
           <ul className="flex flex-1 flex-row px-10 rounded-xl">
             {categories.map((category) => (

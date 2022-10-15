@@ -10,6 +10,7 @@ import {
   getMyComments,
 } from '../../util/axios/user/myPostApi';
 import Pagination from '../Pagination';
+import Loading from '../Loading';
 
 const Post = ({ menu }) => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const Post = ({ menu }) => {
   }, [menu, selectedPage]);
 
   if (!posts) {
-    return <></>;
+    return <Loading />;
   }
 
   return (

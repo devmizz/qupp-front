@@ -8,6 +8,7 @@ import {
 import { getPost } from '../../util/axios/post/postApi';
 
 import PostItem from '../../components/PostItem';
+import Loading from '../../components/Loading';
 
 function Post() {
   const { id } = useParams();
@@ -44,7 +45,7 @@ function Post() {
     getPost(id).then((data) => setPost(data));
   }, [id]);
 
-  if (!post) return null;
+  if (!post) return <Loading />;
 
   return (
     <div className="flex flex-col w-9/12 mx-auto">
